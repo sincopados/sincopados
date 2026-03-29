@@ -3,7 +3,7 @@
 
   const route = useRoute();
 
-  const { locale, locales, setLocale } = useI18n()
+  const { locales, setLocale } = useI18n()
 
 
   const languageItems = ref<DropdownMenuItem[]>([
@@ -62,8 +62,18 @@
     label: 'Contacto',
     //icon: 'i-lucide-rocket',
     to: '/contact',
-    target: '_blank'
+    active: route.path.startsWith('/contact')
   }]);
+
+  const responsiveMenu = ref([
+    ...items.value,
+    {
+      label: 'login',
+      to: '/login',
+      active: route.path.startsWith('/login')
+
+    }
+  ]);
   </script>
 
   <template>
@@ -75,14 +85,14 @@
       }"
     >
       <template #title>
-        <IconsNuxtUI class="h-6 w-auto" />
+        <IconsLogo class="h-8 w-auto" />
       </template>
 
       <UNavigationMenu :items="items" />
 
       <template #right>
         
-        <UColorModeButton />
+        <UColorModeSwitch />
 
         <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
           <UButton
@@ -107,13 +117,12 @@
         >
           <UButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
         </UDropdownMenu>
-        <USelectMenu v-model="value" :items="languages" class="w-48" />
+        <USelectMenu v-model="value" :items="languages" class="w-24" />
       </template>
 
       <template #body>
-        <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <UNavigationMenu :items="responsiveMenu" orientation="vertical" class="-mx-2.5" />
       </template>
     </UHeader>
-    {{ locales }}
   </template>
 

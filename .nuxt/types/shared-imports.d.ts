@@ -6,5 +6,6 @@ declare global {
   const defineAppConfig: <C extends import('nuxt/schema').AppConfigInput>(config: C) => C
   const createError: typeof import('h3')['createError']
   const setResponseStatus: typeof import('h3')['setResponseStatus']
-
+  const Product: typeof import('../../shared/types/product').Product
+  const formatCurrency: typeof import('../../shared/utils/format-currency').formatCurrency
 }
