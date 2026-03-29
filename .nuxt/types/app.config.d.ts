@@ -1,7 +1,7 @@
 
 import type { AppConfigInput, CustomAppConfig } from 'nuxt/schema'
 import type { Defu } from 'defu'
-
+import cfg0 from "../../app/app.config"
 
 declare global {
   const defineAppConfig: <C extends AppConfigInput> (config: C) => C
@@ -18,6 +18,7 @@ declare const inlineConfig = {
     "fallbackToApi": true,
     "cssSelectorPrefix": "i-",
     "cssWherePseudo": true,
+    "cssLayer": "base",
     "mode": "css",
     "attrs": {
       "aria-hidden": true
@@ -305,7 +306,7 @@ declare const inlineConfig = {
     }
   }
 }
-type ResolvedAppConfig = Defu<typeof inlineConfig, []>
+type ResolvedAppConfig = Defu<typeof inlineConfig, [typeof cfg0]>
 type IsAny<T> = 0 extends 1 & T ? true : false
 
 type MergedAppConfig<Resolved extends Record<string, unknown>, Custom extends Record<string, unknown>> = {

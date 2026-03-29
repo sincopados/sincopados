@@ -23,6 +23,7 @@ const links = ref<ButtonProps[]>([
     :description="$t('homeCTADescription')"
     orientation="horizontal"
     :links="links"
+    class="my-4"
   >
     <img
       src="https://picsum.photos/640/728"

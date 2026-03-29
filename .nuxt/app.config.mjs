@@ -12,6 +12,7 @@ const inlineConfig = {
     "fallbackToApi": true,
     "cssSelectorPrefix": "i-",
     "cssWherePseudo": true,
+    "cssLayer": "base",
     "mode": "css",
     "attrs": {
       "aria-hidden": true
@@ -311,6 +312,6 @@ if (import.meta.dev && !import.meta.nitro && import.meta.hot) {
 }
 /** client-end **/
 
+import cfg0 from "/home/usurio/Documentos/Nuxt/sincopados/app/app.config.ts"
 
-
-export default /*@__PURE__*/ defuFn(inlineConfig)
+export default /*@__PURE__*/ defuFn(cfg0, inlineConfig)
