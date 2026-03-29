@@ -160,7 +160,7 @@ const totalPrice = computed(() => {
           </UBadge>
         </div>
 
-        <!-- Description -->
+        <!-- Descriptio n -->
         <div>
           <h2 class="text-lg font-semibold mb-2">Descripción</h2>
           <p class="leading-relaxed">
