@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {
-  type CommandPaletteGroup,
-  type CommandPaletteItem,
-  type NavigationMenuItem,
+import type {
+  CommandPaletteGroup,
+  CommandPaletteItem,
+  NavigationMenuItem,
 } from '@nuxt/ui';
 const items: NavigationMenuItem[][] = [
   [
