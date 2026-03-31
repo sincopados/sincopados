@@ -1,8 +1,11 @@
 <script setup lang="ts">
+
+const { t } = useI18n();
+
 const cards = ref([
   {
-    title: 'Theme',
-    description: 'Learn how to customize Nuxt UI components using Tailwind CSS.',
+    title: t('featuresCardsTitle1'),
+    description: t('featuresCardsDescription1'),
     icon: 'i-lucide-swatch-book',
     to: '/',
     class: 'lg:col-span-2',
@@ -14,22 +17,22 @@ const cards = ref([
     orientation: 'horizontal' as const
   },
   {
-    title: 'Fonts',
-    description: 'Nuxt UI integrates with Nuxt Fonts to provide plug-and-play font optimization.',
+    title: t('featuresCardsTitle2'),
+    description: t('featuresCardsDescription2'),
     icon: 'i-lucide-a-large-small',
     to: '/',
     variant: 'soft' as const
   },
   {
-    title: 'Color Mode',
-    description: 'Nuxt UI integrates with Nuxt Color Mode to switch between light and dark.',
+    title: t('featuresCardsTitle3'),
+    description: t('featuresCardsDescription3'),
     icon: 'i-lucide-sun-moon',
     to: '/',
     variant: 'soft' as const
   },
   {
-    title: 'Icons',
-    description: 'Nuxt UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.',
+    title: t('featuresCardsTitle4'),
+    description: t('featuresCardsDescription4'),
     icon: 'i-lucide-smile',
     to: '/',
     image: {

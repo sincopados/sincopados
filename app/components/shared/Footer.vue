@@ -21,12 +21,9 @@ const items: NavigationMenuItem[] = [
 </script>
 
 <template>
-    |<USeparator
-    :avatar="{
-      src: 'https://github.com/nuxt.png',
-      loading: 'lazy'
-    }"
-  />
+  |<USeparator >
+    <IconsFavicon class="size-16"/>
+  </USeparator>
   <UFooter>
     <template #left>
       <p class="text-muted text-sm">Copyright © {{ new Date().getFullYear() }}</p>
