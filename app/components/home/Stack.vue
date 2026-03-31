@@ -4,8 +4,8 @@
     marquee
     :items="[
       'i-simple-icons-github',
-      'i-simple-icons-discord',
-      'i-simple-icons-x',
+      'arcticons:capcut',
+      'i-simple-icons-google',
       'i-simple-icons-instagram',
       'i-simple-icons-linkedin',
       'simple-icons:davinciresolve',

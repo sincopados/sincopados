@@ -1,7 +1,7 @@
 {
   "welcome": "Bienvenidos",
-  "homeCTATitle": "Producción Audio Visual para Redes Sociales y Youtube",
-  "homeCTADescription": "Somos Una productora en la ciudad de Medellín. Enfocados en el ámbito audiovisual, redes sociales y streaming.",
+  "homeCTATitle": "Videos para Youtube, Tiktok, Instagram y Facebook",
+  "homeCTADescription": "Estamos Especializados en producir vídeos en la ciudad de Medellín. Fortaleciendo tu presencia digital, enfocados en redes sociales y trasmisión en vivo(streaming).",
   "email":"Correo Electrónico",
   "placeholderEmail": "Ingrese su correo electrónico",
   "password": "Contraseña",
@@ -24,7 +24,16 @@
   "testimonialsTitle": "Experiencias Audiovisuales",
   "testimonialsDescription": "Proyectando negocios en constante expansión",
   "testimonialsHeadline": "Testimonios",
-  "featuresTitle": "Servicios Audiovisuales en Medellín",
-  "featuresDescription": "Aliado estratégico en comunicación asertiva para su negocio",
-  "featuresHeadline": "Era Digital"
+  "featuresTitle": "Videos Para redes sociales y Youtube",
+  "featuresDescription": "Aliado tecnologico comunicación asertiva para su negocio",
+  "featuresHeadline": "Video Marketing",
+  "featuresCardsTitle1":"Vídeos para Instagram",
+  "featuresCardsTitle2":"Vídeos para Tiktok",
+  "featuresCardsTitle3":"Vídeos para Facebok",
+  "featuresCardsTitle4":"Vídeos para Youtube",
+  "featuresCardsDescription1":"Transformamos tu visión en Reels de alto impacto que retienen la atención y cierran ventas. Creamos piezas dinámicas, con edición de tendencia y narrativa estratégica para que tu presencia en Instagram sea imposible de ignorar.",
+  "featuresCardsDescription2":"No te ofrecemos un video viral; te ofrecemos un sistema audiovisual que garantiza presencia, prestigio y resultados medibles.",
+  "featuresCardsDescription3":"Producimos piezas audiovisuales optimizadas para el algoritmo de Facebook, enfocadas en captar prospectos de alta calidad y maximizar tu inversión.",
+  "featuresCardsDescription4":"Llevamos tu negocio a dominar el arte del video de formato largo para educar, convencer y fidelizar a tu audiencia. Desde tutoriales técnicos hasta casos de éxito, transformamos tu conocimiento en una herramienta de ventas imparable.",
+  "":""
 }

@@ -20,6 +20,7 @@ export const HomeCTA: typeof import("../app/components/home/CTA.vue")['default']
 export const HomeFeatures: typeof import("../app/components/home/Features.vue")['default']
 export const HomeStack: typeof import("../app/components/home/Stack.vue")['default']
 export const HomeTestimonials: typeof import("../app/components/home/Testimonials.vue")['default']
+export const IconsFavicon: typeof import("../app/components/icons/Favicon.vue")['default']
 export const IconsLogo: typeof import("../app/components/icons/Logo.vue")['default']
 export const IconsLogoGold: typeof import("../app/components/icons/LogoGold.vue")['default']
 export const IconsNuxtUI: typeof import("../app/components/icons/NuxtUI.vue")['default']
@@ -190,6 +191,7 @@ export const LazyHomeCTA: LazyComponent<typeof import("../app/components/home/CT
 export const LazyHomeFeatures: LazyComponent<typeof import("../app/components/home/Features.vue")['default']>
 export const LazyHomeStack: LazyComponent<typeof import("../app/components/home/Stack.vue")['default']>
 export const LazyHomeTestimonials: LazyComponent<typeof import("../app/components/home/Testimonials.vue")['default']>
+export const LazyIconsFavicon: LazyComponent<typeof import("../app/components/icons/Favicon.vue")['default']>
 export const LazyIconsLogo: LazyComponent<typeof import("../app/components/icons/Logo.vue")['default']>
 export const LazyIconsLogoGold: LazyComponent<typeof import("../app/components/icons/LogoGold.vue")['default']>
 export const LazyIconsNuxtUI: LazyComponent<typeof import("../app/components/icons/NuxtUI.vue")['default']>

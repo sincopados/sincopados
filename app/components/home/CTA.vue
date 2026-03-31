@@ -33,6 +33,9 @@ const links = ref<ButtonProps[]>([
       class="w-full rounded-lg"
       loading="lazy"
     />
+    <template #top>
+        <h1 class="flex flex-col items-center justify-center text-4xl font-bold mt-12">Video Marketing en Medellín</h1>
+      </template>
     
   </UPageCTA>
 </template>
