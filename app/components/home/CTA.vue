@@ -26,15 +26,13 @@ const links = ref<ButtonProps[]>([
     class="my-4"
   >
     <img
-      src="https://picsum.photos/640/728"
-      width="320"
-      height="364"
+      src="/home-social-media-medellin.png"
       alt="Illustration"
-      class="w-full rounded-lg"
+      class="w-96 rounded-lg"
       loading="lazy"
     />
     <template #top>
-        <h1 class="flex flex-col items-center justify-center text-4xl font-bold mt-12">Video Marketing en Medellín</h1>
+        <h1 class="flex flex-col items-center justify-center text-6xl font-bold mt-12">Video Marketing en Medellín</h1>
       </template>
     
   </UPageCTA>

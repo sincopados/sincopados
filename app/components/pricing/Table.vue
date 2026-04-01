@@ -1,54 +1,78 @@
 <script setup lang="ts">
+const { t } = useI18n();
+
 const tiers = [
   {
-    id: 'solo',
-    title: 'Solo',
-    price: '$249',
-    description: 'Para autónomos.',
-    billingCycle: '/mes',
+    id: 'standard',
+    title: t('pricingTableTitle1'),
+    price: '$1.499.000',
+    description: t('pricingTableDescription1'),
+    billingCycle: t('pricingTableBillingCycle1'),
     button: { label: 'Comprar ahora', variant: 'subtle' as const },
   },
   {
-    id: 'team',
-    title: 'Equipo',
-    price: '$499',
-    description: 'Para equipos en crecimiento.',
-    billingCycle: '/mes',
+    id: 'profesional',
+    title: t('pricingTableTitle2'),
+    price: '$2.099.000',
+    description: t('pricingTableDescription2'),
+    billingCycle: t('pricingTableBillingCycle1'),
     button: { label: 'Comprar ahora' },
     highlight: true,
   },
   {
     id: 'enterprise',
-    title: 'Empresarial',
+    title: t('pricingTableTitle3'),
     price: 'Personalizado',
-    description: 'Para grandes organizaciones.',
+    description: t('pricingTableDescription3'),
     button: { label: 'Contactar ventas', color: 'neutral' as const },
   },
 ];
 const sections = [
   {
     id: 'features',
-    title: 'Características',
+    title: t('pricingTableFeaturesTitle'),
     features: [
       {
-        id: 'developers',
-        title: 'Cantidad de desarrolladores',
-        tiers: { solo: '1', team: '5', enterprise: 'Ilimitado' },
+        id: 'horas',
+        title: t('pricingTableFeatureTitle1'),
+        tiers: { standard: '4', profesional: '8', enterprise: '+8' },
       },
       {
-        id: 'projects',
-        title: 'Proyectos',
-        tiers: { solo: true, team: true, enterprise: true },
+        id: 'posts',
+        title: t('pricingTableFeatureTitle2'),
+        tiers: { standard: '3', profesional: '5', enterprise: '+7' },
+      },
+      {
+        id: 'plane',
+        title: t('pricingTableFeatureTitle3'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        id: 'edition',
+        title: t('pricingTableFeatureTitle4'),
+        tiers: { standard: true, profesional: true, enterprise: true },
       },
     ],
   },
   {
-    id: 'security',
-    title: 'Seguridad',
+    id: 'marketing',
+    title: t('pricingTableMarketingTitile'),
     features: [
       {
-        title: 'SSO',
-        tiers: { solo: false, team: true, enterprise: true },
+        title: t('pricingTableMarketingTitle1'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle2'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle3'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle1'),
+        tiers: { standard: true, profesional: true, enterprise: true },
       },
     ],
   },
@@ -87,7 +111,7 @@ const plans = ref([
 <template>
   <UPricingTable :tiers="tiers" :sections="sections">
     <!-- Personalizar el título de un nivel específico -->
-    <template #team-title="{ tier }">
+    <template #profesional-title="{ tier }">
       <div class="flex items-center gap-2">
         <UIcon name="i-lucide-crown" class="size-4 text-amber-500" />
         {{ tier.title }}

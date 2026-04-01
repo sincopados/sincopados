@@ -6,11 +6,11 @@ const cards = ref([
   {
     title: t('featuresCardsTitle1'),
     description: t('featuresCardsDescription1'),
-    icon: 'i-lucide-swatch-book',
+    icon: 'simple-icons:instagram',
     to: '/',
     class: 'lg:col-span-2',
     image: {
-      path: 'https://ui2.nuxt.com/illustrations/color-palette',
+      path: '/video-marketing-instagram',
       width: 363,
       height: 152
     },
@@ -19,24 +19,24 @@ const cards = ref([
   {
     title: t('featuresCardsTitle2'),
     description: t('featuresCardsDescription2'),
-    icon: 'i-lucide-a-large-small',
+    icon: 'simple-icons:tiktok',
     to: '/',
     variant: 'soft' as const
   },
   {
     title: t('featuresCardsTitle3'),
     description: t('featuresCardsDescription3'),
-    icon: 'i-lucide-sun-moon',
+    icon: 'simple-icons:facebook',
     to: '/',
     variant: 'soft' as const
   },
   {
     title: t('featuresCardsTitle4'),
     description: t('featuresCardsDescription4'),
-    icon: 'i-lucide-smile',
+    icon: 'simple-icons:youtube',
     to: '/',
     image: {
-      path: 'https://ui2.nuxt.com/illustrations/icon-library',
+      path: '/video-marketing-youtube',
       width: 362,
       height: 184
     },
@@ -52,23 +52,29 @@ const cards = ref([
     :title="$t('featuresTitle')"
     :description="$t('featuresDescription')"
     :headline="$t('featuresHeadline')"
+    :ui="{ 
+
+      }"
   />    
   <UPageGrid class="my-4">
     <UPageCard
       v-for="(card, index) in cards"
       :key="index"
       v-bind="card"
+      :ui="{ 
+        leadingIcon: 'w-16 h-16'
+      }"
     >
-      <UColorModeImage
-        v-if="card.image"
-        :light="`${card.image.path}-light.svg`"
-        :dark="`${card.image.path}-dark.svg`"
-        :width="card.image.width"
-        :height="card.image.height"
-        :alt="card.title"
-        loading="lazy"
-        class="w-full"
-      />
+    <UColorModeImage
+    v-if="card.image"
+    :light="`${card.image.path}-light.jpg`"
+    :dark="`${card.image.path}-dark.jpg`"
+    :width="card.image.width"
+    :height="card.image.height"
+    :alt="card.title"
+    loading="lazy"
+    class="w-full"
+    />
     </UPageCard>
   </UPageGrid>
 </template>
