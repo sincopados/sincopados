@@ -33,7 +33,7 @@ const sections = [
     title: t('pricingTableFeaturesTitle'),
     features: [
       {
-        id: 'horas',
+        id: 'hours',
         title: t('pricingTableFeatureTitle1'),
         tiers: { standard: '4', profesional: '8', enterprise: '+8' },
       },
@@ -51,6 +51,11 @@ const sections = [
         id: 'edition',
         title: t('pricingTableFeatureTitle4'),
         tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        id: 'ia',
+        title: t('pricingTableFeatureTitle5'),
+        tiers: { standard: false, profesional: true, enterprise: true },
       },
     ],
   },
@@ -71,7 +76,27 @@ const sections = [
         tiers: { standard: true, profesional: true, enterprise: true },
       },
       {
-        title: t('pricingTableMarketingTitle1'),
+        title: t('pricingTableMarketingTitle4'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle5'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle6'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle7'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle8'),
+        tiers: { standard: true, profesional: true, enterprise: true },
+      },
+            {
+        title: t('pricingTableMarketingTitle9'),
         tiers: { standard: true, profesional: true, enterprise: true },
       },
     ],
@@ -81,8 +106,8 @@ const plans = ref([
   {
     title: 'Individual',
     description: 'Pensado para desarrolladores independientes.',
-    price: '$249',
-    features: ['Un desarrollador', 'Acceso de por vida'],
+    price: '$899.000',
+    features: ['8 videos', '4 Imágenes'],
     button: {
       label: 'Comprar ahora',
     },
@@ -109,30 +134,51 @@ const plans = ref([
 </script>
 
 <template>
-  <UPricingTable :tiers="tiers" :sections="sections">
+  <UPricingTable :tiers="tiers" :sections="sections" 
+    :ui="{ 
+        tierTitle: 'text-2xl',
+        sectionTitle: 'text-2xl',
+        tierBadge: 'text-2xl',
+        featureTitle: 'text-xl'
+      }"
+  >
     <!-- Personalizar el título de un nivel específico -->
     <template #profesional-title="{ tier }">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center text-2xl gap-2">
         <UIcon name="i-lucide-crown" class="size-4 text-amber-500" />
         {{ tier.title }}
       </div>
     </template>
 
     <!-- Personalizar el título de una sección específica -->
-    <template #section-security-title="{ section }">
-      <div class="flex items-center gap-2">
-        <UIcon name="i-lucide-shield-check" class="size-4 text-green-500" />
+    <template #section-marketing-title="{ section }">
+      <div class="flex items-center text-2xl gap-2">
+        <UIcon name="gis:earth-network" class="size-8 text-green-500" />
         <span class="font-semibold text-green-700">{{ section.title }}</span>
       </div>
     </template>
-
     <!-- Personalizar el valor de una característica específica -->
-    <template #feature-developers-value="{ feature, tier }">
+    <template #feature-hours-value="{ feature, tier }">
       <template v-if="feature.tiers?.[tier.id]">
         <UBadge
           :label="String(feature.tiers[tier.id])"
           color="primary"
           variant="soft"
+          class="text-xl px-4"          
+        />
+      </template>
+      <UIcon v-else name="i-lucide-x" class="size-4 text-muted" />
+    </template>
+
+    <template #feature-posts-value="{ feature, tier }">
+      <template v-if="feature.tiers?.[tier.id]">
+        <UBadge
+          :label="String(feature.tiers[tier.id])"
+          color="primary"
+          variant="soft"
+          :ui="{ 
+            label: 'text-xl px-2',
+          }"
         />
       </template>
       <UIcon v-else name="i-lucide-x" class="size-4 text-muted" />
@@ -140,9 +186,9 @@ const plans = ref([
   </UPricingTable>
 
   <UPageSection
-    headline="Precios"
-    title="Precios"
-    description="Descubre nuestros precios y planes."
+    headline="VIDEO Y FOTOGRAFÍA"
+    title="Paquetes de Contenido"
+    description="Tegusta tener control sobre tus redes sociaels, nosotros re damos una mano con los video y fotos."
   />
 
   <UPricingPlans orientation="vertical" :plans="plans" />
