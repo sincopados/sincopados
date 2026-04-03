@@ -6,12 +6,14 @@
   >
     <template #default>
       <div class="flex items-center justify-center">
-        <IconsLogo name="i-simple-icons-nuxtdotjs" :size="150" />
+        <IconsLogoHorizontal :size="409" />
       </div>
     </template>
   </UPageCTA>
 
-  <div class="mt-10" />
+  <div class="mt-10" >
+    <PricingTable />
+  </div>
 
-  <PricingTable />
+
 </template>

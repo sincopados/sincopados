@@ -82,7 +82,7 @@
       }"
     >
       <template #title>
-        <IconsLogo class="h-8 w-auto" />
+        <IconsLogo class="h-8 sm:h-6 w-auto" />
       </template>
 
       <UNavigationMenu :items="items" />
@@ -90,17 +90,6 @@
       <template #right>
         
         <UColorModeSwitch />
-
-        <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-          <UButton
-            color="neutral"
-            variant="ghost"
-            to="https://github.com/nuxt/ui"
-            target="_blank"
-            icon="i-simple-icons-github"
-            aria-label="GitHub"
-          />
-        </UTooltip>
         <UDropdownMenu
           :items="languageItems"
           :content="{

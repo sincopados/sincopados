@@ -23,6 +23,7 @@ export const HomeTestimonials: typeof import("../app/components/home/Testimonial
 export const IconsFavicon: typeof import("../app/components/icons/Favicon.vue")['default']
 export const IconsLogo: typeof import("../app/components/icons/Logo.vue")['default']
 export const IconsLogoGold: typeof import("../app/components/icons/LogoGold.vue")['default']
+export const IconsLogoHorizontal: typeof import("../app/components/icons/LogoHorizontal.vue")['default']
 export const IconsNuxtUI: typeof import("../app/components/icons/NuxtUI.vue")['default']
 export const PricingTable: typeof import("../app/components/pricing/Table.vue")['default']
 export const ProductCard: typeof import("../app/components/product/Card.vue")['default']
@@ -31,6 +32,7 @@ export const ProductsGrid: typeof import("../app/components/products/Grid.vue")[
 export const SharedFooter: typeof import("../app/components/shared/Footer.vue")['default']
 export const SharedHeader: typeof import("../app/components/shared/Header.vue")['default']
 export const SharedPagination: typeof import("../app/components/shared/Pagination.vue")['default']
+export const SharedWhatsappFloat: typeof import("../app/components/shared/WhatsappFloat.vue")['default']
 export const UColorModeAvatar: typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']
 export const UColorModeButton: typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']
 export const UColorModeImage: typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']
@@ -194,6 +196,7 @@ export const LazyHomeTestimonials: LazyComponent<typeof import("../app/component
 export const LazyIconsFavicon: LazyComponent<typeof import("../app/components/icons/Favicon.vue")['default']>
 export const LazyIconsLogo: LazyComponent<typeof import("../app/components/icons/Logo.vue")['default']>
 export const LazyIconsLogoGold: LazyComponent<typeof import("../app/components/icons/LogoGold.vue")['default']>
+export const LazyIconsLogoHorizontal: LazyComponent<typeof import("../app/components/icons/LogoHorizontal.vue")['default']>
 export const LazyIconsNuxtUI: LazyComponent<typeof import("../app/components/icons/NuxtUI.vue")['default']>
 export const LazyPricingTable: LazyComponent<typeof import("../app/components/pricing/Table.vue")['default']>
 export const LazyProductCard: LazyComponent<typeof import("../app/components/product/Card.vue")['default']>
@@ -202,6 +205,7 @@ export const LazyProductsGrid: LazyComponent<typeof import("../app/components/pr
 export const LazySharedFooter: LazyComponent<typeof import("../app/components/shared/Footer.vue")['default']>
 export const LazySharedHeader: LazyComponent<typeof import("../app/components/shared/Header.vue")['default']>
 export const LazySharedPagination: LazyComponent<typeof import("../app/components/shared/Pagination.vue")['default']>
+export const LazySharedWhatsappFloat: LazyComponent<typeof import("../app/components/shared/WhatsappFloat.vue")['default']>
 export const LazyUColorModeAvatar: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']>
 export const LazyUColorModeButton: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']>
 export const LazyUColorModeImage: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']>

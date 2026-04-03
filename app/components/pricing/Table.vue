@@ -53,8 +53,13 @@ const sections = [
         tiers: { standard: true, profesional: true, enterprise: true },
       },
       {
-        id: 'ia',
+        id: 'caroucel',
         title: t('pricingTableFeatureTitle5'),
+        tiers: { standard: false, profesional: true, enterprise: true },
+      },
+      {
+        id: 'ai',
+        title: t('pricingTableFeatureTitle6'),
         tiers: { standard: false, profesional: true, enterprise: true },
       },
     ],
@@ -104,30 +109,65 @@ const sections = [
 ];
 const plans = ref([
   {
-    title: 'Individual',
-    description: 'Pensado para desarrolladores independientes.',
+    title: t('pricingPlanPacksTitle1'),
+    description: t('pricingPlanPacksDescription1'),
     price: '$899.000',
-    features: ['8 videos', '4 Imágenes'],
+    features: [
+      t('pricingPlanPacksFeature4Videos'),
+      t('pricingPlanPacksFeature1'),
+      t('pricingPlanPacksFeature2'),
+      t('pricingPlanPacksFeature3'),
+      t('pricingPlanPacksFeature4')
+    ],
     button: {
       label: 'Comprar ahora',
     },
   },
   {
-    title: 'Equipo',
-    description: 'Ideal para pequeños equipos.',
+    title: t('pricingPlanPacksTitle2'),
+    description: t('pricingPlanPacksDescription2'),
     price: '$499',
-    features: ['Hasta 5 desarrolladores', 'Todo en Individual'],
+    features: [
+      t('pricingPlanPacksFeature8Videos'),
+      t('pricingPlanPacksFeature1'),
+      t('pricingPlanPacksFeature2'),
+      t('pricingPlanPacksFeature3'),
+      t('pricingPlanPacksFeature4')
+    ],
     button: {
       label: 'Comprar ahora',
     },
   },
   {
-    title: 'Organización',
-    description: 'Perfecto para equipos y organizaciones más grandes.',
+    title: t('pricingPlanPacksTitle3'),
+    description: t('pricingPlanPacksDescription4'),
     price: '$999',
-    features: ['Hasta 20 desarrolladores', 'Todo en Equipo'],
+    features: [
+      t('pricingPlanPacksFeature12Videos'),
+      t('pricingPlanPacksFeature1'),
+      t('pricingPlanPacksFeature2'),
+      t('pricingPlanPacksFeature3'),
+      t('pricingPlanPacksFeature4')
+    ],
     button: {
       label: 'Comprar ahora',
+      to: '/'
+    },
+  },
+  {
+    title: t('pricingPlanPacksTitle4'),
+    description: t('pricingPlanPacksDescription4'),
+    price: '$999',
+    features: [
+      t('pricingPlanPacksFeature12Videos'),
+      t('pricingPlanPacksFeature1'),
+      t('pricingPlanPacksFeature2'),
+      t('pricingPlanPacksFeature3'),
+      t('pricingPlanPacksFeature4')
+    ],
+    button: {
+      label: 'Comprar ahora',
+      to: '/'
     },
   },
 ]);
@@ -186,9 +226,9 @@ const plans = ref([
   </UPricingTable>
 
   <UPageSection
-    headline="VIDEO Y FOTOGRAFÍA"
-    title="Paquetes de Contenido"
-    description="Tegusta tener control sobre tus redes sociaels, nosotros re damos una mano con los video y fotos."
+    :headline="$t('pricingTablePackHeadline')"
+    :title="$t('pricingTablePackTitle')"
+    :description="$t('pricingTablePacDescription')"
   />
 
   <UPricingPlans orientation="vertical" :plans="plans" />
