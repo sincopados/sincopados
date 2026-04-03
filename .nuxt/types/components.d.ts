@@ -23,6 +23,7 @@ interface _GlobalComponents {
   IconsFavicon: typeof import("../../app/components/icons/Favicon.vue")['default']
   IconsLogo: typeof import("../../app/components/icons/Logo.vue")['default']
   IconsLogoGold: typeof import("../../app/components/icons/LogoGold.vue")['default']
+  IconsLogoHorizontal: typeof import("../../app/components/icons/LogoHorizontal.vue")['default']
   IconsNuxtUI: typeof import("../../app/components/icons/NuxtUI.vue")['default']
   PricingTable: typeof import("../../app/components/pricing/Table.vue")['default']
   ProductCard: typeof import("../../app/components/product/Card.vue")['default']
@@ -31,6 +32,7 @@ interface _GlobalComponents {
   SharedFooter: typeof import("../../app/components/shared/Footer.vue")['default']
   SharedHeader: typeof import("../../app/components/shared/Header.vue")['default']
   SharedPagination: typeof import("../../app/components/shared/Pagination.vue")['default']
+  SharedWhatsappFloat: typeof import("../../app/components/shared/WhatsappFloat.vue")['default']
   UColorModeAvatar: typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']
   UColorModeButton: typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']
   UColorModeImage: typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']
@@ -194,6 +196,7 @@ interface _GlobalComponents {
   LazyIconsFavicon: LazyComponent<typeof import("../../app/components/icons/Favicon.vue")['default']>
   LazyIconsLogo: LazyComponent<typeof import("../../app/components/icons/Logo.vue")['default']>
   LazyIconsLogoGold: LazyComponent<typeof import("../../app/components/icons/LogoGold.vue")['default']>
+  LazyIconsLogoHorizontal: LazyComponent<typeof import("../../app/components/icons/LogoHorizontal.vue")['default']>
   LazyIconsNuxtUI: LazyComponent<typeof import("../../app/components/icons/NuxtUI.vue")['default']>
   LazyPricingTable: LazyComponent<typeof import("../../app/components/pricing/Table.vue")['default']>
   LazyProductCard: LazyComponent<typeof import("../../app/components/product/Card.vue")['default']>
@@ -202,6 +205,7 @@ interface _GlobalComponents {
   LazySharedFooter: LazyComponent<typeof import("../../app/components/shared/Footer.vue")['default']>
   LazySharedHeader: LazyComponent<typeof import("../../app/components/shared/Header.vue")['default']>
   LazySharedPagination: LazyComponent<typeof import("../../app/components/shared/Pagination.vue")['default']>
+  LazySharedWhatsappFloat: LazyComponent<typeof import("../../app/components/shared/WhatsappFloat.vue")['default']>
   LazyUColorModeAvatar: LazyComponent<typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']>
   LazyUColorModeButton: LazyComponent<typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']>
   LazyUColorModeImage: LazyComponent<typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.0_@tiptap+extensions@3.21.0_@tiptap+core@3.21.0_@tiptap+pm@3.21.0__@tiptap_71241b00986456a70434737e7c552ccb/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']>
