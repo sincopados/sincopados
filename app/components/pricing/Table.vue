@@ -1,22 +1,47 @@
 <script setup lang="ts">
+import type { link } from '#build/ui';
+import { string } from 'zod';
+
 const { t } = useI18n();
+
+// Obtenemos la URL actual de forma reactiva
+const url = useRequestURL()
+
+// Configuración del mensaje y número
+const phone = '573105720977';
+
+const getWhatsAppLink = (planName: string) => {
+  const message = `Hola, Deseo Adquirir El Paquete ${planName} ${url.href}`;
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+};
+
+const planStandarMessage = computed(() => getWhatsAppLink('Standar'));
+const planProfessionalMessage = computed(() => getWhatsAppLink('Professional'));
+const planStarterMessage = computed(() => getWhatsAppLink('Started'));
+
+const planPlusMessage = computed(() => getWhatsAppLink('Plus'));
+
+const planProMessage = computed(() => getWhatsAppLink('Pro'));
+
+const planStudioMessage = computed(() => getWhatsAppLink('Studio'));
 
 const tiers = [
   {
     id: 'standard',
     title: t('pricingTableTitle1'),
-    price: '$1.499.000',
+    price: t('pricingValueStandar'),
     description: t('pricingTableDescription1'),
     billingCycle: t('pricingTableBillingCycle1'),
-    button: { label: 'Comprar ahora', variant: 'subtle' as const },
+    button: { label: 'Comprar ahora',  variant: 'subtle' as const},
+    
   },
   {
     id: 'profesional',
     title: t('pricingTableTitle2'),
-    price: '$2.099.000',
+    price: t('pricingValueProfessional'),
     description: t('pricingTableDescription2'),
     billingCycle: t('pricingTableBillingCycle1'),
-    button: { label: 'Comprar ahora' },
+    button: { label: 'Comprar ahora'},
     highlight: true,
   },
   {
@@ -24,7 +49,7 @@ const tiers = [
     title: t('pricingTableTitle3'),
     price: 'Personalizado',
     description: t('pricingTableDescription3'),
-    button: { label: 'Contactar ventas', color: 'neutral' as const },
+    button: { label: 'Contactar ventas', color: 'neutral' as const},
   },
 ];
 const sections = [
@@ -40,7 +65,7 @@ const sections = [
       {
         id: 'posts',
         title: t('pricingTableFeatureTitle2'),
-        tiers: { standard: '3', profesional: '5', enterprise: '+7' },
+        tiers: { standard: '3', profesional: '6 ', enterprise: '+7' },
       },
       {
         id: 'plane',
@@ -102,7 +127,15 @@ const sections = [
       },
             {
         title: t('pricingTableMarketingTitle9'),
-        tiers: { standard: true, profesional: true, enterprise: true },
+        tiers: { standard: false, profesional: true, enterprise: true },
+      },
+      {
+        title: t('pricingTableMarketingTitle10'),
+        tiers: { standard: false, profesional: true, enterprise: true },
+      },
+            {
+        title: t('pricingTableMarketingTitle11'),
+        tiers: { standard: false, profesional: true, enterprise: true },
       },
     ],
   },
@@ -111,7 +144,7 @@ const plans = ref([
   {
     title: t('pricingPlanPacksTitle1'),
     description: t('pricingPlanPacksDescription1'),
-    price: '$899.000',
+    price: t('pricingValueStarter'),
     features: [
       t('pricingPlanPacksFeature4Videos'),
       t('pricingPlanPacksFeature1'),
@@ -121,12 +154,13 @@ const plans = ref([
     ],
     button: {
       label: 'Comprar ahora',
+      to: planStarterMessage,
     },
   },
   {
     title: t('pricingPlanPacksTitle2'),
     description: t('pricingPlanPacksDescription2'),
-    price: '$499',
+    price: t('pricingValuePlus'),
     features: [
       t('pricingPlanPacksFeature8Videos'),
       t('pricingPlanPacksFeature1'),
@@ -136,12 +170,13 @@ const plans = ref([
     ],
     button: {
       label: 'Comprar ahora',
+      to: planPlusMessage,
     },
   },
   {
     title: t('pricingPlanPacksTitle3'),
     description: t('pricingPlanPacksDescription4'),
-    price: '$999',
+    price: t('pricingValuePro'),
     features: [
       t('pricingPlanPacksFeature12Videos'),
       t('pricingPlanPacksFeature1'),
@@ -151,15 +186,15 @@ const plans = ref([
     ],
     button: {
       label: 'Comprar ahora',
-      to: '/'
+      to: planProMessage,
     },
   },
   {
     title: t('pricingPlanPacksTitle4'),
     description: t('pricingPlanPacksDescription4'),
-    price: '$999',
+    price: t('pricingValueStudio'),
     features: [
-      t('pricingPlanPacksFeature12Videos'),
+      t('pricingPlanPacksFeature16Videos'),
       t('pricingPlanPacksFeature1'),
       t('pricingPlanPacksFeature2'),
       t('pricingPlanPacksFeature3'),
@@ -167,7 +202,7 @@ const plans = ref([
     ],
     button: {
       label: 'Comprar ahora',
-      to: '/'
+      to: planStudioMessage,
     },
   },
 ]);

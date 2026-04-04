@@ -2,43 +2,53 @@
 export const pathToI18nConfig = {
   "//product/:slug()": {
     "en": "//product/:slug()",
-    "es": "//product/:slug()"
+    "es": "//product/:slug()",
+    "nl": "//product/:slug()"
   },
   "//about": {
     "en": "//about",
-    "es": "//about"
+    "es": "//about",
+    "nl": "//about"
   },
   "//contact": {
     "en": "//contact",
-    "es": "//contact"
+    "es": "//contact",
+    "nl": "//contact"
   },
   "/dashboard": {
     "en": "/dashboard",
-    "es": "/dashboard"
+    "es": "/dashboard",
+    "nl": "/dashboard"
   },
   "/dashboard/products": {
     "en": "/dashboard/products",
-    "es": "/dashboard/products"
+    "es": "/dashboard/products",
+    "nl": "/dashboard/products"
   },
   "//login": {
     "en": "//login",
-    "es": "//login"
+    "es": "//login",
+    "nl": "//login"
   },
   "//pricing": {
     "en": "//pricing",
-    "es": "//pricing"
+    "es": "//pricing",
+    "nl": "//pricing"
   },
   "//products": {
     "en": "//products",
-    "es": "//products"
+    "es": "//products",
+    "nl": "//products"
   },
   "//register": {
     "en": "//register",
-    "es": "//register"
+    "es": "//register",
+    "nl": "//register"
   },
   "/": {
     "en": "/",
-    "es": "/"
+    "es": "/",
+    "nl": "/"
   }
 };
 export const i18nPathToPath = {
