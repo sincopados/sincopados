@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import typegen from '../node_modules/.pnpm/eslint-typegen@2.3.1_eslint@10.1.0_jiti@2.6.1_/node_modules/eslint-typegen/dist/index.mjs';
-import { createConfigForNuxt, defineFlatConfigs, resolveOptions } from '../node_modules/.pnpm/@nuxt+eslint-config@1.15.2_@typescript-eslint+utils@8.57.2_eslint@10.1.0_jiti@2.6.1__ty_a8f9c1ed92de59a3ada0c8c14f1595d2/node_modules/@nuxt/eslint-config/dist/flat.mjs';
+import { createConfigForNuxt, defineFlatConfigs, resolveOptions } from '../node_modules/.pnpm/@nuxt+eslint-config@1.15.2_@typescript-eslint+utils@8.58.0_eslint@10.1.0_jiti@2.6.1__ty_408349ecf74b183f2aa0dab652837779/node_modules/@nuxt/eslint-config/dist/flat.mjs';
 import { fileURLToPath } from 'node:url';
 
 const r = (...args) => fileURLToPath(new URL(...args, import.meta.url))

@@ -1,6 +1,5 @@
   <script setup lang="ts">
   import type { NavigationMenuItem, DropdownMenuItem, SelectMenuItem } from '@nuxt/ui';
-  import * as loc from '@nuxt/ui/locale'
 
   const route = useRoute();
 
@@ -22,11 +21,19 @@
         setLocale('en')
       }
     },
+        {
+      label: 'Nederlands',
+      icon: 'circle-flags:nl',
+      onSelect: () =>{
+        setLocale('nl')
+      }
+    },
   ]);
 
   const languagesBase = [
-  { label: 'Español', value: 'es', icon: 'circle-flags:co' },
-  { label: 'English', value: 'en', icon: 'circle-flags:us' }
+    { label: 'Español', value: 'es', icon: 'circle-flags:co' },
+    { label: 'English', value: 'en', icon: 'circle-flags:us' },
+    { label: 'Nederlands', value: 'nl', icon: 'circle-flags:nl' }
 ]
 
   const items = computed<NavigationMenuItem[]>(() => [{
@@ -65,6 +72,8 @@
   const iconLanguage = computed(()=> {
     if (locale.value === 'en') {
       iconText.value = languagesBase[1]
+    } else if(locale.value === 'nl') {
+      iconText.value = languagesBase[2]
     } else {
       iconText.value = languagesBase[0]
     }
