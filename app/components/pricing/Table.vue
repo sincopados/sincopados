@@ -209,6 +209,12 @@ const plans = ref([
 </script>
 
 <template>
+  <UPageSection
+    :headline="$t('pricingTablePlanHeadline')"
+    :title="$t('pricingTablePlanTitle')"
+    :description="$t('pricingTablePlanDescription')"
+  />
+
   <UPricingTable :tiers="tiers" :sections="sections" 
     :ui="{ 
         tierTitle: 'text-2xl',
