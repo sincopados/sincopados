@@ -33,6 +33,8 @@ export const SharedFooter: typeof import("../app/components/shared/Footer.vue")[
 export const SharedHeader: typeof import("../app/components/shared/Header.vue")['default']
 export const SharedPagination: typeof import("../app/components/shared/Pagination.vue")['default']
 export const SharedWhatsappFloat: typeof import("../app/components/shared/WhatsappFloat.vue")['default']
+export const YoutubeCTA: typeof import("../app/components/youtube/CTA.vue")['default']
+export const YoutubeFeatures: typeof import("../app/components/youtube/Features.vue")['default']
 export const UColorModeAvatar: typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']
 export const UColorModeButton: typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']
 export const UColorModeImage: typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']
@@ -206,6 +208,8 @@ export const LazySharedFooter: LazyComponent<typeof import("../app/components/sh
 export const LazySharedHeader: LazyComponent<typeof import("../app/components/shared/Header.vue")['default']>
 export const LazySharedPagination: LazyComponent<typeof import("../app/components/shared/Pagination.vue")['default']>
 export const LazySharedWhatsappFloat: LazyComponent<typeof import("../app/components/shared/WhatsappFloat.vue")['default']>
+export const LazyYoutubeCTA: LazyComponent<typeof import("../app/components/youtube/CTA.vue")['default']>
+export const LazyYoutubeFeatures: LazyComponent<typeof import("../app/components/youtube/Features.vue")['default']>
 export const LazyUColorModeAvatar: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']>
 export const LazyUColorModeButton: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']>
 export const LazyUColorModeImage: LazyComponent<typeof import("../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']>

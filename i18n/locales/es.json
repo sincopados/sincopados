@@ -66,6 +66,9 @@
   "pricingTablePackHeadline":"VIDEO Y FOTOGRAFÍA",
   "pricingTablePackTitle":"Paquetes de Contenido",
   "pricingTablePacDescription":"Te gusta tener control sobre tus redes sociales. Nosotros te damos una mano con el video y fotos. Muéstranos tu estrategia y nosotros la hecemos realidad.",
+  "pricingTablePlanHeadline":"VIDEO MARKETING",
+  "pricingTablePlanTitle":"Planes Mensuales",
+  "pricingTablePlanDescription":"Llevamos tu contenido de redes sociales a otro nivel",
   "pricingPlanPacksTitle1":"Paquete Starter",
   "pricingPlanPacksTitle2":"Paquete Plus",
   "pricingPlanPacksTitle3":"Paquete Pro",
@@ -89,7 +92,6 @@
   "pricingValuePlus":"$1.352.000",
   "pricingValuePro":"$1.820.000",
   "pricingValueStudio":"$2.184.000",
-  
   
   "":""
 }

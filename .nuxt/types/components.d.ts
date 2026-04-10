@@ -33,6 +33,8 @@ interface _GlobalComponents {
   SharedHeader: typeof import("../../app/components/shared/Header.vue")['default']
   SharedPagination: typeof import("../../app/components/shared/Pagination.vue")['default']
   SharedWhatsappFloat: typeof import("../../app/components/shared/WhatsappFloat.vue")['default']
+  YoutubeCTA: typeof import("../../app/components/youtube/CTA.vue")['default']
+  YoutubeFeatures: typeof import("../../app/components/youtube/Features.vue")['default']
   UColorModeAvatar: typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']
   UColorModeButton: typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']
   UColorModeImage: typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']
@@ -206,6 +208,8 @@ interface _GlobalComponents {
   LazySharedHeader: LazyComponent<typeof import("../../app/components/shared/Header.vue")['default']>
   LazySharedPagination: LazyComponent<typeof import("../../app/components/shared/Pagination.vue")['default']>
   LazySharedWhatsappFloat: LazyComponent<typeof import("../../app/components/shared/WhatsappFloat.vue")['default']>
+  LazyYoutubeCTA: LazyComponent<typeof import("../../app/components/youtube/CTA.vue")['default']>
+  LazyYoutubeFeatures: LazyComponent<typeof import("../../app/components/youtube/Features.vue")['default']>
   LazyUColorModeAvatar: LazyComponent<typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeAvatar.vue")['default']>
   LazyUColorModeButton: LazyComponent<typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeButton.vue")['default']>
   LazyUColorModeImage: LazyComponent<typeof import("../../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.1_@tiptap+core@3.22.1_@tiptap+pm@3.22.1__@tiptap_9f2ba4caada15717920a500c2ca9c18c/node_modules/@nuxt/ui/dist/runtime/components/color-mode/ColorModeImage.vue")['default']>

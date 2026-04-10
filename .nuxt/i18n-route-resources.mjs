@@ -45,6 +45,11 @@ export const pathToI18nConfig = {
     "es": "//register",
     "nl": "//register"
   },
+  "//videos-youtube": {
+    "en": "//videos-youtube",
+    "es": "//videos-youtube",
+    "nl": "//videos-youtube"
+  },
   "/": {
     "en": "/",
     "es": "/",
@@ -61,5 +66,6 @@ export const i18nPathToPath = {
   "//pricing": "//pricing",
   "//products": "//products",
   "//register": "//register",
+  "//videos-youtube": "//videos-youtube",
   "/": "/"
 };
