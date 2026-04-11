@@ -4,16 +4,16 @@ declare module "nitropack/types" {
   type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T
   interface InternalApi {
     '/__nuxt_error': {
-      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_8f80e42b5cba1a508b53f73700a825b6/node_modules/@nuxt/nitro-server/dist/runtime/handlers/renderer').default>>>>
+      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_9ab6563766e4af80498b43d190c6c8ce/node_modules/@nuxt/nitro-server/dist/runtime/handlers/renderer').default>>>>
     }
     '/__nuxt_island/**': {
       'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../server/#internal/nuxt/island-renderer').default>>>>
     }
     '/api/_nuxt_icon/:collection': {
-      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxt+icon@2.2.1_magicast@0.5.2_vite@7.3.1_jiti@2.6.1_lightningcss@1.32.0_terser@5.46.1_0abb9d544558f7b49973f5ecc36b4733/node_modules/@nuxt/icon/dist/runtime/server/api').default>>>>
+      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxt+icon@2.2.1_magicast@0.5.2_vite@7.3.2_jiti@2.6.1_lightningcss@1.32.0_terser@5.46.1_0edef668face737fc2d9887ce7778370/node_modules/@nuxt/icon/dist/runtime/server/api').default>>>>
     }
     '/_i18n/:hash/:locale/messages.json': {
-      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_873bfb92b2f5d4a97cf077d07c14adde/node_modules/@nuxtjs/i18n/dist/runtime/server/routes/messages').default>>>>
+      'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_e7c66773835df07f141f3a075fb01143/node_modules/@nuxtjs/i18n/dist/runtime/server/routes/messages').default>>>>
     }
     '/_ipx/**': {
       'default': Simplify<Serialize<Awaited<ReturnType<typeof import('../../node_modules/.pnpm/@nuxt+image@2.0.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_srvx@0.11.15/node_modules/@nuxt/image/dist/runtime/server/routes/_ipx').default>>>>

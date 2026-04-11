@@ -77,11 +77,11 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
       },
 
       domainLocales: {
-         en: {
+         es: {
             domain: string,
          },
 
-         es: {
+         en: {
             domain: string,
          },
 
