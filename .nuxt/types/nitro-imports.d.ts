@@ -1,8 +1,8 @@
 declare global {
   const H3Error: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').H3Error
   const H3Event: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').H3Event
-  const __buildAssetsURL: typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_8f80e42b5cba1a508b53f73700a825b6/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths').buildAssetsURL
-  const __publicAssetsURL: typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_8f80e42b5cba1a508b53f73700a825b6/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths').publicAssetsURL
+  const __buildAssetsURL: typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_9ab6563766e4af80498b43d190c6c8ce/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths').buildAssetsURL
+  const __publicAssetsURL: typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_9ab6563766e4af80498b43d190c6c8ce/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths').publicAssetsURL
   const appendCorsHeaders: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').appendCorsHeaders
   const appendCorsPreflightHeaders: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').appendCorsPreflightHeaders
   const appendHeader: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').appendHeader
@@ -22,13 +22,13 @@ declare global {
   const createEventStream: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').createEventStream
   const createRouter: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').createRouter
   const defaultContentType: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').defaultContentType
-  const defineAppConfig: typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_8f80e42b5cba1a508b53f73700a825b6/node_modules/@nuxt/nitro-server/dist/runtime/utils/config').defineAppConfig
+  const defineAppConfig: typeof import('../../node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_9ab6563766e4af80498b43d190c6c8ce/node_modules/@nuxt/nitro-server/dist/runtime/utils/config').defineAppConfig
   const defineCachedEventHandler: typeof import('../../node_modules/.pnpm/nitropack@2.13.3_srvx@0.11.15/node_modules/nitropack/dist/runtime/internal/cache').defineCachedEventHandler
   const defineCachedFunction: typeof import('../../node_modules/.pnpm/nitropack@2.13.3_srvx@0.11.15/node_modules/nitropack/dist/runtime/internal/cache').defineCachedFunction
   const defineEventHandler: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').defineEventHandler
-  const defineI18nConfig: typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_873bfb92b2f5d4a97cf077d07c14adde/node_modules/@nuxtjs/i18n/dist/runtime/composables/shared').defineI18nConfig
-  const defineI18nLocale: typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_873bfb92b2f5d4a97cf077d07c14adde/node_modules/@nuxtjs/i18n/dist/runtime/composables/shared').defineI18nLocale
-  const defineI18nLocaleDetector: typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_873bfb92b2f5d4a97cf077d07c14adde/node_modules/@nuxtjs/i18n/dist/runtime/composables/server').defineI18nLocaleDetector
+  const defineI18nConfig: typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_e7c66773835df07f141f3a075fb01143/node_modules/@nuxtjs/i18n/dist/runtime/composables/shared').defineI18nConfig
+  const defineI18nLocale: typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_e7c66773835df07f141f3a075fb01143/node_modules/@nuxtjs/i18n/dist/runtime/composables/shared').defineI18nLocale
+  const defineI18nLocaleDetector: typeof import('../../node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_e7c66773835df07f141f3a075fb01143/node_modules/@nuxtjs/i18n/dist/runtime/composables/server').defineI18nLocaleDetector
   const defineLazyEventHandler: typeof import('../../node_modules/.pnpm/h3@1.15.11/node_modules/h3').defineLazyEventHandler
   const defineNitroErrorHandler: typeof import('../../node_modules/.pnpm/nitropack@2.13.3_srvx@0.11.15/node_modules/nitropack/dist/runtime/internal/error/utils').defineNitroErrorHandler
   const defineNitroPlugin: typeof import('../../node_modules/.pnpm/nitropack@2.13.3_srvx@0.11.15/node_modules/nitropack/dist/runtime/internal/plugin').defineNitroPlugin
@@ -167,11 +167,11 @@ export { getRouteRules } from 'nitropack/runtime/internal/route-rules';
 export { useEvent } from 'nitropack/runtime/internal/context';
 export { defineTask, runTask } from 'nitropack/runtime/internal/task';
 export { defineNitroErrorHandler } from 'nitropack/runtime/internal/error/utils';
-export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_8f80e42b5cba1a508b53f73700a825b6/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths';
-export { defineAppConfig } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_8f80e42b5cba1a508b53f73700a825b6/node_modules/@nuxt/nitro-server/dist/runtime/utils/config';
+export { buildAssetsURL as __buildAssetsURL, publicAssetsURL as __publicAssetsURL } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_9ab6563766e4af80498b43d190c6c8ce/node_modules/@nuxt/nitro-server/dist/runtime/utils/paths';
+export { defineAppConfig } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxt+nitro-server@4.4.2_@babel+core@7.29.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_nux_9ab6563766e4af80498b43d190c6c8ce/node_modules/@nuxt/nitro-server/dist/runtime/utils/config';
 export { useImage } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxt+image@2.0.0_db0@0.3.4_ioredis@5.10.1_magicast@0.5.2_srvx@0.11.15/node_modules/@nuxt/image/dist/runtime/server/utils/image';
-export { defineI18nLocale, defineI18nConfig } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_873bfb92b2f5d4a97cf077d07c14adde/node_modules/@nuxtjs/i18n/dist/runtime/composables/shared';
-export { defineI18nLocaleDetector } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_873bfb92b2f5d4a97cf077d07c14adde/node_modules/@nuxtjs/i18n/dist/runtime/composables/server';
+export { defineI18nLocale, defineI18nConfig } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_e7c66773835df07f141f3a075fb01143/node_modules/@nuxtjs/i18n/dist/runtime/composables/shared';
+export { defineI18nLocaleDetector } from '/home/usurio/Documentos/Nuxt/sincopados/node_modules/.pnpm/@nuxtjs+i18n@10.2.3_@emnapi+core@1.9.2_@emnapi+runtime@1.9.2_@vue+compiler-dom@3.5.32_d_e7c66773835df07f141f3a075fb01143/node_modules/@nuxtjs/i18n/dist/runtime/composables/server';
 export { useTranslation } from '@intlify/h3';
 export { getCookieLocale, getHeaderLanguage, getHeaderLanguages, getHeaderLocale, getHeaderLocales, getPathLocale, getQueryLocale, setCookieLocale, tryCookieLocale, tryHeaderLocale, tryHeaderLocales, tryPathLocale, tryQueryLocale } from '@intlify/utils/h3';
 export { formatCurrency } from '/home/usurio/Documentos/Nuxt/sincopados/shared/utils/format-currency';

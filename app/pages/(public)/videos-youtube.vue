@@ -4,8 +4,11 @@
 
 <template>
     <div>
-        <YoutubeCTA />        
+        <YoutubeCTA />     
+
         <YoutubeFeatures />
+
+        <YoutubeForm />
     </div>
 </template>
 

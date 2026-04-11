@@ -10,6 +10,7 @@
     {
       label: 'Español',
       icon: 'circle-flags:co',
+      code: 'ES',
       onSelect: () =>{
         setLocale('es')
       }
@@ -17,6 +18,7 @@
     {
       label: 'English',
       icon: 'circle-flags:us',
+      code: 'EN',
       onSelect: () =>{
         setLocale('en')
       }
@@ -24,6 +26,7 @@
         {
       label: 'Nederlands',
       icon: 'circle-flags:nl',
+      code: 'NL',
       onSelect: () =>{
         setLocale('nl')
       }
@@ -37,10 +40,15 @@
 ]
 
   const items = computed<NavigationMenuItem[]>(() => [{
-    label: 'Productos',
-    to: '/products',
+    label: 'Redes Sociales',
+    to: '/redes-sociales',
     //icon: 'i-lucide-book-open',
-    active: route.path.startsWith('/products')
+    active: route.path.startsWith('/redes-sociales')
+  }, {
+    label: 'Youtube',
+    //icon: 'i-lucide-rocket',
+    to: '/videos-youtube',
+    active: route.path.startsWith('/videos-youtube')
   }, {
     label: 'Precios',
     to: '/pricing',
@@ -51,11 +59,6 @@
     //icon: 'i-simple-icons-figma',
     to: '/about',
     active: route.path.startsWith('/about')
-  }, {
-    label: 'Contacto',
-    //icon: 'i-lucide-rocket',
-    to: '/contact',
-    active: route.path.startsWith('/contact')
   }]);
 
   const responsiveMenu = ref([
@@ -113,7 +116,7 @@
             content: 'w-48'
           }"
         >
-          <UButton :label="iconText?.label" :icon="iconLanguage" color="neutral" variant="outline" />
+          <UButton :label="iconText?.value" :icon="iconLanguage" color="neutral" variant="outline" />
         </UDropdownMenu>
       </template>
       <template #body>
