@@ -5,13 +5,15 @@ const { t } = useI18n();
 const links = ref<ButtonProps[]>([
   {
     label: t('welcome'),
-    color: 'neutral'
+    color: 'neutral',
+    to:'/pricing'
   },
   {
     label: 'Conoce Más',
     color: 'neutral',
     variant: 'subtle',
-    trailingIcon: 'i-lucide-arrow-right'
+    trailingIcon: 'i-lucide-arrow-right',
+    to:'/pricing'
   }
 ]);
 

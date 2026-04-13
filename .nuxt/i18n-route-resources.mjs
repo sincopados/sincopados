@@ -3,62 +3,74 @@ export const pathToI18nConfig = {
   "//product/:slug()": {
     "es": "//product/:slug()",
     "en": "//product/:slug()",
-    "nl": "//product/:slug()"
+    "nl": "//product/:slug()",
+    "fr": "//product/:slug()"
   },
   "//about": {
     "es": "//about",
     "en": "//about",
-    "nl": "//about"
+    "nl": "//about",
+    "fr": "//about"
   },
   "//contact": {
     "es": "//contact",
     "en": "//contact",
-    "nl": "//contact"
+    "nl": "//contact",
+    "fr": "//contact"
   },
   "/dashboard": {
     "es": "/dashboard",
     "en": "/dashboard",
-    "nl": "/dashboard"
+    "nl": "/dashboard",
+    "fr": "/dashboard"
   },
   "/dashboard/products": {
     "es": "/dashboard/products",
     "en": "/dashboard/products",
-    "nl": "/dashboard/products"
+    "nl": "/dashboard/products",
+    "fr": "/dashboard/products"
   },
   "//login": {
     "es": "//login",
     "en": "//login",
-    "nl": "//login"
+    "nl": "//login",
+    "fr": "//login"
   },
   "//pricing": {
     "es": "//pricing",
     "en": "//pricing",
-    "nl": "//pricing"
+    "nl": "//pricing",
+    "fr": "//pricing"
   },
   "//products": {
     "es": "//products",
     "en": "//products",
-    "nl": "//products"
+    "nl": "//products",
+    "fr": "//products"
   },
   "//redes-sociales": {
     "es": "//redes-sociales",
     "en": "//redes-sociales",
-    "nl": "//redes-sociales"
+    "nl": "//redes-sociales",
+    "fr": "//redes-sociales"
   },
   "//register": {
     "es": "//register",
     "en": "//register",
-    "nl": "//register"
+    "nl": "//register",
+    "fr": "//register"
   },
   "//videos-youtube": {
     "es": "//videos-youtube",
     "en": "//videos-youtube",
-    "nl": "//videos-youtube"
+    "nl": "//videos-youtube",
+    "fr": "//videos-youtube"
   },
   "/": {
     "es": "/",
     "en": "/",
-    "nl": "/"
+    "nl": "/",
+    "fr": "/"
   }
 };
 export const i18nPathToPath = {

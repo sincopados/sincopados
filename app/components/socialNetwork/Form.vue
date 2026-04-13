@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { z } from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
+import { z } from 'zod';
+import type { FormSubmitEvent } from '@nuxt/ui';
 
-type UserType = 'creator' | 'negocio' | null
-type PlanType = 'starter' | 'profesional' | null
+const { t } = useI18n();
+
+type UserType = 'creator' | 'negocio' | null;
+type PlanType = 'starter' | 'profesional' | null;
 
 const plans = {
   starter: {
     name: 'Plan Starter',
-    price: '$299',
+    price: t('pricingValueStandar'),
     period: '/mes',
     description: 'Ideal para comenzar tu presencia en redes sociales.',
     icon: 'i-lucide-zap',
@@ -25,7 +27,7 @@ const plans = {
   },
   profesional: {
     name: 'Plan Profesional',
-    price: '$699',
+    price: t('pricingValueProfessional'),
     period: '/mes',
     description: 'Para marcas y negocios que quieren dominar su nicho.',
     icon: 'i-lucide-star',
@@ -43,9 +45,9 @@ const plans = {
   },
 }
 
-const userType = ref<UserType>(null)
-const selectedPlan = ref<PlanType>(null)
-const submitted = ref(false)
+const userType = ref<UserType>(null);
+const selectedPlan = ref<PlanType>(null);
+const submitted = ref(false);
 
 const schema = z.object({
   name: z.string().min(2, 'El nombre es requerido'),
@@ -53,7 +55,7 @@ const schema = z.object({
   phone: z.string().optional(),
   handle: z.string().optional(),
   message: z.string().optional(),
-})
+});
 
 type Schema = z.output<typeof schema>
 
@@ -63,7 +65,7 @@ const state = reactive<Partial<Schema>>({
   phone: '',
   handle: '',
   message: '',
-})
+});
 
 const userTypeOptions = [
   {
@@ -78,7 +80,7 @@ const userTypeOptions = [
     description: 'Empresa, tienda, restaurante, marca',
     icon: 'i-lucide-building-2',
   },
-]
+];
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   if (!userType.value || !selectedPlan.value) return
@@ -88,7 +90,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const selectedPlanData = computed(() => {
   if (!selectedPlan.value) return null
   return plans[selectedPlan.value]
-})
+});
 </script>
 
 <template>

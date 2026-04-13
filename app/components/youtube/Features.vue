@@ -1,29 +1,37 @@
 <script setup lang="ts">
+
+const { t } = useI18n(); 
+
 const features = [
   {
     icon: 'i-lucide-graduation-cap',
-    title: 'Videos Educativos',
-    description: 'Contenido didáctico que enseña y entretiene. Tutoriales, cursos y explicaciones visuales que enganchan a tu audiencia.'
+    title: t('youtubeFeaturesTitle1'),
+    description: t('youtubeFeaturesDescription1')
   },
   {
     icon: 'i-lucide-sparkles',
-    title: 'Videos LifeStyle',
-    description: 'Vlogs, día a día y contenido aspiracional. Mostramos tu estilo de vida de manera auténtica y atractiva.'
+    title: t('youtubeFeaturesTitle2'),
+    description: t('youtubeFeaturesDescription2')
   },
   {
     icon: 'i-lucide-mic',
-    title: 'Videos Podcast',
-    description: 'Producción profesional para tus conversaciones. Clips dinámicos, audiogramas y formato completo optimizado para YouTube.'
+    title: t('youtubeFeaturesTitle3'),
+    description: t('youtubeFeaturesDescription3')
   },
   {
     icon: 'i-lucide-building-2',
-    title: 'Videos Corporativos',
-    description: 'Comunicación empresarial de alto nivel. Presentaciones, capacitaciones y contenido institucional que refleja tu marca.'
+    title:  t('youtubeFeaturesTitle4'),
+    description: t('youtubeFeaturesDescription4')
   },
   {
     icon: 'i-lucide-radio',
-    title: 'Transmisiones en Vivo',
-    description: 'Producción en tiempo real con calidad profesional. Eventos, webinars y streaming con múltiples cámaras y gráficos.'
+    title:  t('youtubeFeaturesTitle5'),
+    description: t('youtubeFeaturesDescription5')
+  },
+  {
+    icon: 'ic:twotone-confirmation-number',
+    title:  t('youtubeFeaturesTitle6'),
+    description: t('youtubeFeaturesDescription6')
   }
 ]
 </script>
@@ -33,15 +41,15 @@ const features = [
     <UContainer>
       <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <UBadge label="Nuestros Servicios" color="primary" variant="subtle" class="mb-4" />
+        <UBadge :label="$t('youtubeCTABadget')" color="primary" variant="subtle" class="mb-4" />
         
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-highlighted mb-6 text-balance">
-          Todo lo que necesitas para triunfar en YouTube
+          {{$t('youtubeFeaturesTitle')}}
         </h2>
         
         <p class="text-lg text-muted text-pretty">
-          Ofrecemos soluciones completas de producción audiovisual adaptadas a cada tipo de contenido. 
-          Desde la conceptualización hasta la entrega final, nos encargamos de todo.
+          {{$t('youtubeFeaturesTitle')}}
+          
         </p>
       </div>
       
@@ -93,22 +101,22 @@ const features = [
           <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="text-center md:text-left">
               <h3 class="text-2xl font-bold text-inverted mb-2">
-                ¿Listo para crear contenido increíble?
+                {{$t('youtubeFeaturesCTATitle')}}
               </h3>
               <p class="text-inverted/70">
-                Contáctanos hoy y recibe una cotización personalizada sin compromiso.
+                {{$t('youtubeFeaturesCTADescription')}}
               </p>
             </div>
             
             <div class="flex gap-3">
               <UButton 
-                label="Solicitar cotización" 
+                :label="$t('youtubeFeaturesCTAButton1')"
                 color="primary"
                 size="lg"
                 to="#contacto"
               />
               <UButton 
-                label="Ver ejemplos" 
+                :label="$t('youtubeFeaturesCTAButton2')"
                 color="neutral"
                 variant="subtle"
                 size="lg"

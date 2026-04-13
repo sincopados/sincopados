@@ -15,24 +15,23 @@ const horizontalVideoId = 'dQw4w9WgXcQ'
           <UBadge label="Producción Profesional" color="primary" variant="subtle" />
           
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-highlighted tracking-tight text-balance">
-            Creamos videos que
-            <span class="text-primary">impulsan tu marca</span>
+            {{$t('youtubeCTATitle')}}
+            <span class="text-primary">{{$t('youtubeCTATitleBadget')}}</span>
           </h1>
           
           <p class="text-lg text-muted max-w-xl mx-auto lg:mx-0 text-pretty">
-            Transformamos tus ideas en contenido visual de alto impacto para YouTube. 
-            Desde shorts virales hasta videos completos que enganchan a tu audiencia.
+            {{$t('youtubeCTAParagraph')}}
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <UButton 
-              label="Contratar servicio" 
+              :label="$t('youtubeCTAbutton1')"
               size="xl"
               icon="i-lucide-rocket"
               to="#contacto"
             />
             <UButton 
-              label="Ver portafolio" 
+              :label="$t('youtubeCTAbutton2')"
               color="neutral" 
               variant="outline"
               size="xl"
@@ -44,15 +43,15 @@ const horizontalVideoId = 'dQw4w9WgXcQ'
           <div class="flex flex-wrap gap-8 justify-center lg:justify-start pt-6">
             <div class="text-center">
               <p class="text-3xl font-bold text-highlighted">500+</p>
-              <p class="text-sm text-muted">Videos creados</p>
+              <p class="text-sm text-muted">{{$t('youtubeCTAStats1')}}</p>
             </div>
             <div class="text-center">
               <p class="text-3xl font-bold text-highlighted">50M+</p>
-              <p class="text-sm text-muted">Visualizaciones</p>
+              <p class="text-sm text-muted">{{$t('youtubeCTAStats2')}}</p>
             </div>
             <div class="text-center">
               <p class="text-3xl font-bold text-highlighted">98%</p>
-              <p class="text-sm text-muted">Clientes satisfechos</p>
+              <p class="text-sm text-muted">{{$t('youtubeCTAStats3')}}</p>
             </div>
           </div>
         </div>
