@@ -56,27 +56,28 @@ function selectIcon(index: number) {
       <!-- Left: Copy -->
       <div class="flex-1 text-center lg:text-left space-y-6 z-10">
         <UBadge color="primary" variant="outline" size="lg" class="uppercase tracking-widest">
-          Video Marketing
+          {{ $t('socialNetworkCTABadget') }}
         </UBadge>
         
         <h1 class="text-5xl lg:text-7xl font-extrabold text-highlighted leading-tight text-balance">
-          Conecta con tu
-          <span class="text-primary">audiencia</span>
-          donde importa
+          {{ $t('socialNetworkCTATitle1') }}
+          <span class="text-primary">{{ $t('socialNetworkCTATitleBadget') }}</span>
+          {{ $t('socialNetworkCTATitle2') }}
         </h1>
         
         <p class="text-lg text-muted max-w-lg leading-relaxed">
-          Creamos reels y contenido de alto impacto para Facebook, Instagram y TikTok que convierte seguidores en clientes. Planes mensuales sin contratos de largo plazo.
+          {{ $t('socialNetworkCTAParagraph') }}
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <UButton size="xl" class="font-bold rounded-full">
-            Ver Planes Mensuales
+            {{ $t('socialNetworkCTAButton1') }}
             <UIcon name="i-lucide-arrow-right" class="size-5" />
           </UButton>
           <UButton variant="outline" color="neutral" size="xl" class="font-semibold rounded-full">
             <UIcon name="i-lucide-play" class="size-5" />
-            Ver Demo
+            {{ $t('socialNetworkCTAButton2') }}
+            {{ $t('') }}
           </UButton>
         </div>
 
@@ -171,7 +172,7 @@ function selectIcon(index: number) {
               <div class="absolute bottom-4 left-3 right-14 space-y-1">
                 <p class="text-highlighted text-xs font-semibold">@tuempresa</p>
                 <p class="text-highlighted text-xs opacity-80 leading-tight">
-                  Nuestro mejor reel del mes #viral #marketing
+                  {{ $t('socialNetworkCTACelDescription') }} #viral #marketing
                 </p>
                 <!-- Progress bar -->
                 <UProgress :model-value="66" size="xs" class="mt-2" />
@@ -198,7 +199,7 @@ function selectIcon(index: number) {
 
         <!-- Decorative floating metrics -->
         <div class="absolute -right-8 top-16 bg-elevated border border-muted rounded-2xl px-4 py-3 shadow-xl stat-card">
-          <p class="text-xs text-muted">Alcance</p>
+          <p class="text-xs text-muted">{{ $t('socialNetworkCTACelReach') }}</p>
           <p class="text-xl font-bold text-primary">+340%</p>
         </div>
         <div class="absolute -left-10 bottom-24 bg-elevated border border-muted rounded-2xl px-4 py-3 shadow-xl stat-card">

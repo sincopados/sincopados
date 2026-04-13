@@ -1,5 +1,5 @@
-/// <reference types="@nuxt/image" />
 /// <reference types="@nuxt/fonts" />
+/// <reference types="@nuxt/image" />
 /// <reference types="@nuxt/eslint" />
 /// <reference types="@nuxt/icon" />
 /// <reference types="@nuxt/ui" />

@@ -14,6 +14,10 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 
+export const AboutCTA: typeof import("../app/components/about/CTA.vue")['default']
+export const AboutHistory: typeof import("../app/components/about/History.vue")['default']
+export const AboutTeam: typeof import("../app/components/about/Team.vue")['default']
+export const AboutTimeline: typeof import("../app/components/about/Timeline.vue")['default']
 export const DashboardNavbar: typeof import("../app/components/dashboard/Navbar.vue")['default']
 export const DashboardSidebar: typeof import("../app/components/dashboard/Sidebar.vue")['default']
 export const HomeCTA: typeof import("../app/components/home/CTA.vue")['default']
@@ -194,6 +198,10 @@ export const Html: typeof import("../node_modules/.pnpm/nuxt@4.4.2_@babel+core@7
 export const Body: typeof import("../node_modules/.pnpm/nuxt@4.4.2_@babel+core@7.29.0_@babel+plugin-syntax-jsx@7.28.6_@babel+core@7.29.0__@emna_26f9b9c14a278cd471142ebbac7e049a/node_modules/nuxt/dist/head/runtime/components")['Body']
 export const ColorScheme: typeof import("../node_modules/.pnpm/@nuxtjs+color-mode@3.5.2_magicast@0.5.2/node_modules/@nuxtjs/color-mode/dist/runtime/component.vue3.vue")['default']
 export const NuxtIsland: typeof import("../node_modules/.pnpm/nuxt@4.4.2_@babel+core@7.29.0_@babel+plugin-syntax-jsx@7.28.6_@babel+core@7.29.0__@emna_26f9b9c14a278cd471142ebbac7e049a/node_modules/nuxt/dist/app/components/nuxt-island")['default']
+export const LazyAboutCTA: LazyComponent<typeof import("../app/components/about/CTA.vue")['default']>
+export const LazyAboutHistory: LazyComponent<typeof import("../app/components/about/History.vue")['default']>
+export const LazyAboutTeam: LazyComponent<typeof import("../app/components/about/Team.vue")['default']>
+export const LazyAboutTimeline: LazyComponent<typeof import("../app/components/about/Timeline.vue")['default']>
 export const LazyDashboardNavbar: LazyComponent<typeof import("../app/components/dashboard/Navbar.vue")['default']>
 export const LazyDashboardSidebar: LazyComponent<typeof import("../app/components/dashboard/Sidebar.vue")['default']>
 export const LazyHomeCTA: LazyComponent<typeof import("../app/components/home/CTA.vue")['default']>

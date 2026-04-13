@@ -7,7 +7,7 @@ const cards = ref([
     title: t('featuresCardsTitle1'),
     description: t('featuresCardsDescription1'),
     icon: 'simple-icons:instagram',
-    to: '/',
+    to: '/redes-sociales',
     class: 'lg:col-span-2',
     image: {
       path: '/video-marketing-instagram',
@@ -20,21 +20,21 @@ const cards = ref([
     title: t('featuresCardsTitle2'),
     description: t('featuresCardsDescription2'),
     icon: 'simple-icons:tiktok',
-    to: '/',
+    to: '/redes-sociales',
     variant: 'soft' as const
   },
   {
     title: t('featuresCardsTitle3'),
     description: t('featuresCardsDescription3'),
     icon: 'simple-icons:facebook',
-    to: '/',
+    to: '/redes-sociales',
     variant: 'soft' as const
   },
   {
     title: t('featuresCardsTitle4'),
     description: t('featuresCardsDescription4'),
     icon: 'simple-icons:youtube',
-    to: '/',
+    to: '/videos-youtube',
     image: {
       path: '/video-marketing-youtube',
       width: 362,

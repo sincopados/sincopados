@@ -17,7 +17,7 @@
           <UCard :ui="{ body: 'p-8' }">
             <form class="space-y-6" @submit.prevent>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <UFormField label="Nombre" name="name" required>
+                <UFormField :label="$t('youtubeFormName')" name="name" required>
                   <UInput placeholder="Tu nombre" icon="i-lucide-user" />
                 </UFormField>
                 

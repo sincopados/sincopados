@@ -23,7 +23,7 @@
         setLocale('en')
       }
     },
-        {
+    {
       label: 'Nederlands',
       icon: 'circle-flags:nl',
       code: 'NL',
@@ -31,12 +31,21 @@
         setLocale('nl')
       }
     },
+    {
+      label: 'Français',
+      icon: 'circle-flags:fr',
+      code: 'FR',
+      onSelect: () =>{
+        setLocale('fr')
+      }
+    },
   ]);
 
   const languagesBase = [
-    { label: 'Español', value: 'es', icon: 'circle-flags:co' },
-    { label: 'English', value: 'en', icon: 'circle-flags:us' },
-    { label: 'Nederlands', value: 'nl', icon: 'circle-flags:nl' }
+    { label: 'Español', value: 'es', code: 'ES', icon: 'circle-flags:co' },
+    { label: 'English', value: 'en', code: 'EN', icon: 'circle-flags:us' },
+    { label: 'Nederlands', value: 'nl', code: 'NL', icon: 'circle-flags:nl' },
+    { label: 'Français', value: 'fr', code: 'FR', icon: 'circle-flags:fr' }
 ]
 
   const items = computed<NavigationMenuItem[]>(() => [{
@@ -77,6 +86,8 @@
       iconText.value = languagesBase[1]
     } else if(locale.value === 'nl') {
       iconText.value = languagesBase[2]
+    } else if(locale.value === 'fr') {
+      iconText.value = languagesBase[3]
     } else {
       iconText.value = languagesBase[0]
     }
@@ -116,7 +127,7 @@
             content: 'w-48'
           }"
         >
-          <UButton :label="iconText?.value" :icon="iconLanguage" color="neutral" variant="outline" />
+          <UButton :label="iconText?.code" :icon="iconLanguage" color="neutral" variant="outline" />
         </UDropdownMenu>
       </template>
       <template #body>
@@ -125,3 +136,4 @@
     </UHeader>
   </template>
 
+ 
