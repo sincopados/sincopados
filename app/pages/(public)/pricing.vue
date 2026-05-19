@@ -15,6 +15,7 @@ useSeoMeta({
 });
 </script>
 <template>
+  <!-- 
     <UPageCTA
     orientation="horizontal"
     :title="$t('pricingPageCTATitle')"
@@ -26,6 +27,7 @@ useSeoMeta({
       </div>
     </template>
   </UPageCTA>
+  -->
 
   <div class="mt-10" >
     <PricingTable />

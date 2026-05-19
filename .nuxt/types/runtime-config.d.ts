@@ -19,6 +19,24 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
    },
   }
   interface SharedPublicRuntimeConfig {
+   gtag: {
+      enabled: boolean,
+
+      initMode: string,
+
+      id: string,
+
+      initCommands: Array<any>,
+
+      config: any,
+
+      tags: Array<any>,
+
+      loadingStrategy: string,
+
+      url: string,
+   },
+
    i18n: {
       baseUrl: string,
 
