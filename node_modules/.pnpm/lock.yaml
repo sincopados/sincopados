@@ -26,6 +26,9 @@ importers:
       '@nuxtjs/i18n':
         specifier: 10.2.3
         version: 10.2.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@vue/compiler-dom@3.5.32)(db0@0.3.4)(eslint@10.2.0(jiti@2.6.1))(ioredis@5.10.1)(magicast@0.5.2)(rollup@4.60.1)(vue@3.5.32(typescript@5.9.3))
+      npx:
+        specifier: ^10.2.2
+        version: 10.2.2
       nuxt:
         specifier: ^4.4.2
         version: 4.4.2(@babel/core@7.29.0)(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@parcel/watcher@2.5.6)(@vue/compiler-sfc@3.5.32)(cac@6.7.14)(db0@0.3.4)(eslint@10.2.0(jiti@2.6.1))(ioredis@5.10.1)(lightningcss@1.32.0)(magicast@0.5.2)(optionator@0.9.4)(rollup-plugin-visualizer@7.0.1(rollup@4.60.1))(rollup@4.60.1)(srvx@0.11.15)(terser@5.46.1)(typescript@5.9.3)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(yaml@2.8.3)
@@ -42,6 +45,9 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
+      nuxt-gtag:
+        specifier: ^4.1.0
+        version: 4.1.0(magicast@0.5.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -4290,11 +4296,22 @@ packages:
     resolution: {integrity: sha512-9qny7Z9DsQU8Ou39ERsPU4OZQlSTP47ShQzuKZ6PRXpYLtIFgl/DEBYEXKlvcEa+9tHVcK8CF81Y2V72qaZhWA==}
     engines: {node: '>=18'}
 
+  npx@10.2.2:
+    resolution: {integrity: sha512-eImmySusyeWphzs5iNh791XbZnZG0FSNvM4KSah34pdQQIDsdTDhIwg1sjN3AIVcjGLpbQ/YcfqHPshKZQK1fA==}
+    deprecated: This package is now part of the npm CLI.
+    hasBin: true
+    bundledDependencies:
+      - npm
+      - libnpx
+
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
   nuxt-define@1.0.0:
     resolution: {integrity: sha512-CYZ2WjU+KCyCDVzjYUM4eEpMF0rkPmkpiFrybTqqQCRpUbPt2h3snswWIpFPXTi+osRCY6Og0W/XLAQgDL4FfQ==}
+
+  nuxt-gtag@4.1.0:
+    resolution: {integrity: sha512-2TL7RUA8N8NYGbY4UZ9IqKyMZMgO9cCGu6yqadUU8RF+Y81PXI+k+1giIA11XXStaJoGXaXeNsBUIJXn1tUy3A==}
 
   nuxt@4.4.2:
     resolution: {integrity: sha512-iWVFpr/YEqVU/CenqIHMnIkvb2HE/9f+q8oxZ+pj2et+60NljGRClCgnmbvGPdmNFE0F1bEhoBCYfqbDOCim3Q==}
@@ -9993,11 +10010,22 @@ snapshots:
       path-key: 4.0.0
       unicorn-magic: 0.3.0
 
+  npx@10.2.2: {}
+
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
 
   nuxt-define@1.0.0: {}
+
+  nuxt-gtag@4.1.0(magicast@0.5.2):
+    dependencies:
+      '@nuxt/kit': 4.4.2(magicast@0.5.2)
+      defu: 6.1.7
+      pathe: 2.0.3
+      ufo: 1.6.3
+    transitivePeerDependencies:
+      - magicast
 
   nuxt@4.4.2(@babel/core@7.29.0)(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@parcel/watcher@2.5.6)(@vue/compiler-sfc@3.5.32)(cac@6.7.14)(db0@0.3.4)(eslint@10.2.0(jiti@2.6.1))(ioredis@5.10.1)(lightningcss@1.32.0)(magicast@0.5.2)(optionator@0.9.4)(rollup-plugin-visualizer@7.0.1(rollup@4.60.1))(rollup@4.60.1)(srvx@0.11.15)(terser@5.46.1)(typescript@5.9.3)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(yaml@2.8.3):
     dependencies:

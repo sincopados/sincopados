@@ -47,5 +47,7 @@ export { useScrollShadow } from '../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+ex
 export { useScrollspy } from '../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.3_@tiptap+core@3.22.3_@tiptap+pm@3.22.3__@tiptap_6112333bc36cd6d9f8206f67fd5f3a19/node_modules/@nuxt/ui/dist/runtime/composables/useScrollspy';
 export { useToast } from '../node_modules/.pnpm/@nuxt+ui@4.6.1_@tiptap+extensions@3.22.3_@tiptap+core@3.22.3_@tiptap+pm@3.22.3__@tiptap_6112333bc36cd6d9f8206f67fd5f3a19/node_modules/@nuxt/ui/dist/runtime/composables/useToast';
 export { useI18n } from 'vue-i18n';
+export { useGtag } from '../node_modules/.pnpm/nuxt-gtag@4.1.0_magicast@0.5.2/node_modules/nuxt-gtag/dist/runtime/composables/useGtag';
+export { useTrackEvent } from '../node_modules/.pnpm/nuxt-gtag@4.1.0_magicast@0.5.2/node_modules/nuxt-gtag/dist/runtime/composables/useTrackEvent';
 export { useNuxtDevTools } from '../node_modules/.pnpm/@nuxt+devtools@3.2.4_vite@7.3.2_jiti@2.6.1_lightningcss@1.32.0_terser@5.46.1_yaml@2.8.3__vue@3.5.32_typescript@5.9.3_/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { useColorMode } from '../node_modules/.pnpm/@nuxtjs+color-mode@3.5.2_magicast@0.5.2/node_modules/@nuxtjs/color-mode/dist/runtime/composables';
