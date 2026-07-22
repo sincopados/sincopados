@@ -58,7 +58,7 @@ export default {
         "leadingIcon": "size-4",
         "leadingAvatarSize": "3xs",
         "trailingIcon": "size-4",
-        "segment": "not-data-[segment=literal]:w-6"
+        "segment": "not-data-[segment=literal]:w-8"
       },
       "sm": {
         "base": [
@@ -70,7 +70,7 @@ export default {
         "leadingIcon": "size-4",
         "leadingAvatarSize": "3xs",
         "trailingIcon": "size-4",
-        "segment": "not-data-[segment=literal]:w-6"
+        "segment": "not-data-[segment=literal]:w-8"
       },
       "md": {
         "base": [
@@ -82,7 +82,7 @@ export default {
         "leadingIcon": "size-5",
         "leadingAvatarSize": "2xs",
         "trailingIcon": "size-5",
-        "segment": "not-data-[segment=literal]:w-7"
+        "segment": "not-data-[segment=literal]:w-9"
       },
       "lg": {
         "base": [
@@ -94,7 +94,7 @@ export default {
         "leadingIcon": "size-5",
         "leadingAvatarSize": "2xs",
         "trailingIcon": "size-5",
-        "segment": "not-data-[segment=literal]:w-7"
+        "segment": "not-data-[segment=literal]:w-9"
       },
       "xl": {
         "base": [
@@ -106,7 +106,7 @@ export default {
         "leadingIcon": "size-6",
         "leadingAvatarSize": "xs",
         "trailingIcon": "size-6",
-        "segment": "not-data-[segment=literal]:w-8"
+        "segment": "not-data-[segment=literal]:w-10"
       }
     },
     "variant": {

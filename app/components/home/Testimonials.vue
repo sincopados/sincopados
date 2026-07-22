@@ -144,24 +144,26 @@ const testimonials = ref([
   <UPageColumns>
     <UPageCard
       variant="solid"
-      to="https://cloudflare.com"
+      to="https://alas-carbon-y-cedo.netlify.app/"
+      image ="https://alas-carbon-y-cedo.netlify.app/logo.svg"
       icon="i-logos-cloudflare-icon"
-      title="Cloudflare's Workers LaunchPad"
-      description="NuxtHub is part of the Cloudflare's Workers Launchpad Cohort to make sure you get a first-class experience on top of Cloudflare's network."
+      title="Equipo de Alas Carbón y Cerdo"
+      description="Gracias a Asincopados Producciones por su invaluable apoyo digital y la implementación de sistemas empresariales. En Alas Carbón y Cerdo logramos optimizar nuestra operación y potenciar nuestro negocio. ¡Totalmente recomendados!"
       :ui="{ leadingIcon: 'size-10' }"
     />
-
-    <UPageCard
+    <!--
+      <UPageCard
       v-for="(testimonial, index) in testimonials"
       :key="index"
       variant="subtle"
       :description="testimonial.quote"
       :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]' }"
-    >
+      >
       <template #footer>
         <UUser v-bind="testimonial.user" size="xl" />
       </template>
     </UPageCard>
+    -->
   </UPageColumns>
 </template>
 
