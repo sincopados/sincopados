@@ -58,7 +58,7 @@ export default {
         "leadingIcon": "size-4",
         "leadingAvatarSize": "3xs",
         "trailingIcon": "size-4",
-        "segment": "data-[segment=day]:w-6 data-[segment=month]:w-6 data-[segment=year]:w-9"
+        "segment": "data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10"
       },
       "sm": {
         "base": [
@@ -70,7 +70,7 @@ export default {
         "leadingIcon": "size-4",
         "leadingAvatarSize": "3xs",
         "trailingIcon": "size-4",
-        "segment": "data-[segment=day]:w-6 data-[segment=month]:w-6 data-[segment=year]:w-9"
+        "segment": "data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10"
       },
       "md": {
         "base": [
@@ -82,7 +82,7 @@ export default {
         "leadingIcon": "size-5",
         "leadingAvatarSize": "2xs",
         "trailingIcon": "size-5",
-        "segment": "data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-11"
+        "segment": "data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11"
       },
       "lg": {
         "base": [
@@ -94,7 +94,7 @@ export default {
         "leadingIcon": "size-5",
         "leadingAvatarSize": "2xs",
         "trailingIcon": "size-5",
-        "segment": "data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-11"
+        "segment": "data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11"
       },
       "xl": {
         "base": [
@@ -106,7 +106,7 @@ export default {
         "leadingIcon": "size-6",
         "leadingAvatarSize": "xs",
         "trailingIcon": "size-6",
-        "segment": "data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-13"
+        "segment": "data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12"
       }
     },
     "variant": {

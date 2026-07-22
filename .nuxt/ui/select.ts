@@ -24,6 +24,11 @@ const color = [
   "neutral"
 ] as const
 
+const position = [
+  "popper",
+  "item-aligned"
+] as const
+
 export default {
   "slots": {
     "base": [
@@ -39,7 +44,7 @@ export default {
     "value": "truncate pointer-events-none",
     "placeholder": "truncate text-dimmed",
     "arrow": "fill-bg stroke-default",
-    "content": "max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col",
+    "content": "max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col",
     "viewport": "relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1",
     "group": "p-1 isolate",
     "empty": "text-center text-muted",
@@ -183,6 +188,14 @@ export default {
     },
     "type": {
       "file": "file:me-1.5 file:font-medium file:text-muted file:outline-none"
+    },
+    "position": {
+      "popper": {
+        "content": "data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]"
+      },
+      "item-aligned": {
+        "content": ""
+      }
     }
   },
   "compoundVariants": [
@@ -366,6 +379,7 @@ export default {
   "defaultVariants": {
     "size": "md" as typeof size[number],
     "color": "primary" as typeof color[number],
-    "variant": "outline" as typeof variant[number]
+    "variant": "outline" as typeof variant[number],
+    "position": "popper" as typeof position[number]
   }
 }

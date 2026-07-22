@@ -15,6 +15,19 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
   ssr: true,
+
+  app:{
+    head: {
+      title: 'NEUROFIT - brain',
+      meta: [
+        {
+          name: 'description',
+          content: 'Programa identificación y tratamiento de el ansaimer',
+        }
+      ],
+    },
+
+  },
     
   i18n: {
     locales: [
@@ -28,5 +41,5 @@ export default defineNuxtConfig({
 
   gtag: {
     id: 'G-V1HZ72Q0JF'
-  }
+  },
 })
