@@ -168,5 +168,17 @@
   "seoMetaAboutDescription": "",
   "seoMetaHomeTitle": "Audiovisuele Productie in Medellín | Sincopados Producciones",
   "seoMetaHomeDescription": "Sincopados Producciones: Toonaangevend audiovisueel bureau in Medellín. Wij maken video's met hoge impact voor YouTube en sociale media die uw merk versterken. Vraag nu een offerte aan!",
-  "": ""
+  "": "",
+  "loginError": "Inloggen mislukt",
+  "registerError": "Registratie mislukt",
+  "registerSuccess": "Registratie voltooid",
+  "registerSuccessDescription": "Bevestig je account via je e-mail en log daarna in.",
+  "referralCode": "Referralcode",
+  "placeholderReferralCode": "Code van wie je uitnodigde (optioneel)",
+  "zodRequiereName": "Naam verplicht",
+  "confirmingSession": "Je sessie wordt bevestigd…",
+  "navReferrals": "Referrals",
+  "navProfile": "Mijn profiel",
+  "logout": "Uitloggen",
+  "account": "Account"
 }

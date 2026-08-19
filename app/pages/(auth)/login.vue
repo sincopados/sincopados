@@ -9,6 +9,20 @@ definePageMeta({
 });
 
 const toast = useToast();
+const client = useSupabaseClient();
+const user = useSupabaseUser();
+const redirectInfo = useSupabaseCookieRedirect();
+const localePath = useLocalePath();
+const loading = ref(false);
+
+const goToDashboard = () => {
+  const saved = redirectInfo.pluck();
+  return navigateTo(saved || localePath('/dashboard'));
+};
+
+watchEffect(() => {
+  if (user.value) goToDashboard();
+});
 
 const fields: AuthFormField[] = [{
   name: 'email',
@@ -19,7 +33,7 @@ const fields: AuthFormField[] = [{
 }, {
   name: 'password',
   label: t('password'),
-  type: 'Password',
+  type: 'password',
   placeholder: t('placeholderPassword'),
   required: true
 }, {
@@ -28,18 +42,25 @@ const fields: AuthFormField[] = [{
   type: 'checkbox'
 }];
 
+const signInWithProvider = async (provider: 'google' | 'github') => {
+  const { error } = await client.auth.signInWithOAuth({
+    provider,
+    options: { redirectTo: `${window.location.origin}${localePath('/confirm')}` }
+  });
+
+  if (error) {
+    toast.add({ title: t('loginError'), description: error.message, color: 'error' });
+  }
+};
+
 const providers = [{
   label: 'Google',
   icon: 'i-simple-icons-google',
-  onClick: () => {
-    toast.add({ title: 'Google', description: t('providerGoogleDes') })
-  }
+  onClick: () => signInWithProvider('google')
 }, {
   label: 'GitHub',
   icon: 'i-simple-icons-github',
-  onClick: () => {
-    toast.add({ title: 'GitHub', description: t('providerGitHubDes') })
-  }
+  onClick: () => signInWithProvider('github')
 }];
 
 const schema = z.object({
@@ -49,8 +70,22 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload)
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+  loading.value = true;
+
+  const { error } = await client.auth.signInWithPassword({
+    email: payload.data.email,
+    password: payload.data.password
+  });
+
+  loading.value = false;
+
+  if (error) {
+    toast.add({ title: t('loginError'), description: error.message, color: 'error' });
+    return;
+  }
+
+  await goToDashboard();
 };
 </script>
 
@@ -64,6 +99,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user"
         :fields="fields"
         :providers="providers"
+        :loading="loading"
         @submit="onSubmit"
         :ui="{
             leadingIcon: 'text-2xl',
@@ -74,8 +110,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     color="primary"
     variant="ghost"
     :label="$t('goToRegister')"
-    to="/register"
+    :to="localePath('/register')"
     />
   </div>
 </template>
-
