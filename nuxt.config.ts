@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/ui',
     '@nuxtjs/i18n',
+    '@nuxtjs/supabase',
     'nuxt-gtag'
   ],
 
@@ -37,6 +38,19 @@ export default defineNuxtConfig({
       { code: 'fr', language: 'fr-FR', name:'français',file: 'fr.json' }
     ],
     defaultLocale: 'es',
+  },
+
+  supabase: {
+    // Sólo el dashboard exige sesión; el sitio público sigue siendo anónimo.
+    redirect: true,
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      include: ['/dashboard(/*)?', '/*/dashboard(/*)?'],
+      exclude: ['/', '/login', '/register', '/confirm', '/*/login', '/*/register', '/*/confirm'],
+      saveRedirectToCookie: true,
+    },
+    types: '~/types/database.types.ts',
   },
 
   gtag: {

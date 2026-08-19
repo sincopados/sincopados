@@ -168,5 +168,17 @@
   "seoMetaAboutDescription": "",
   "seoMetaHomeTitle": "Production Audiovisuelle à Medellín | Sincopados Productions",
   "seoMetaHomeDescription": "Sincopados Productions : Agence audiovisuelle leader à Medellín. Nous créons des vidéos à fort impact pour YouTube et les réseaux sociaux qui boostent votre marque. Demandez un devis !",
-  "": ""
+  "": "",
+  "loginError": "Connexion impossible",
+  "registerError": "Inscription impossible",
+  "registerSuccess": "Inscription terminée",
+  "registerSuccessDescription": "Vérifiez votre e-mail pour confirmer le compte, puis connectez-vous.",
+  "referralCode": "Code de parrainage",
+  "placeholderReferralCode": "Code de la personne qui vous a invité (facultatif)",
+  "zodRequiereName": "Nom requis",
+  "confirmingSession": "Confirmation de votre session…",
+  "navReferrals": "Parrainage",
+  "navProfile": "Mon profil",
+  "logout": "Se déconnecter",
+  "account": "Compte"
 }

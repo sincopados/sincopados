@@ -1,136 +1,96 @@
+<script setup lang="ts">
+import type { Database } from '~/types/db';
+
+const client = useSupabaseClient<Database>();
+const userId = useAuthUserId();
+const localePath = useLocalePath();
+const { profile, role, isStaff, isSuperuser } = useProfile();
+
+const money = (value: number) =>
+  new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(value);
+
+// Un único bloque de métricas, filtrado por la RLS: cada rol recibe sólo
+// aquello que puede ver, sin ramificar consultas por tipo de usuario.
+const { data: stats } = await useAsyncData('dashboard-stats', async () => {
+  if (!userId.value) return null;
+
+  const [users, services, courses, summary] = await Promise.all([
+    client.from('profiles').select('id', { count: 'exact', head: true }),
+    client.from('client_services').select('id', { count: 'exact', head: true }).eq('status', 'activo'),
+    client.from('enrollments').select('id', { count: 'exact', head: true }).eq('status', 'activo'),
+    client.from('referral_summary').select('*').eq('profile_id', userId.value).maybeSingle(),
+  ]);
+
+  return {
+    users: users.count ?? 0,
+    services: services.count ?? 0,
+    courses: courses.count ?? 0,
+    referredCount: summary.data?.referred_count ?? 0,
+    totalEarned: summary.data?.total_earned ?? 0,
+  };
+}, { watch: [userId] });
+
+const greeting = computed(() => profile.value?.full_name?.split(' ')[0] || profile.value?.email || '');
+</script>
+
 <template>
   <div class="space-y-6">
-    <!-- Header -->
     <div>
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-        Bienvenido a tu Dashboard
+      <h1 class="text-3xl font-bold text-highlighted">
+        Hola, {{ greeting }}
       </h1>
-      <p class="text-gray-600 dark:text-gray-400 mt-2">
-        Aquí puedes ver un resumen de tu panel administrativo
+      <p class="mt-2 text-muted">
+        Panel de {{ role ? ROLE_LABELS[role] : '' }}
       </p>
     </div>
 
-    <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <UCard>
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              Total Products
-            </span>
-            <UIcon name="i-lucide-package" class="w-5 h-5 text-blue-500" />
-          </div>
-        </template>
-
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">
-            127
-          </span>
-          <span class="text-xs text-green-600 dark:text-green-400">
-            +12 this week
-          </span>
-        </div>
-      </UCard>
-
-      <UCard>
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              Active Orders
-            </span>
-            <UIcon
-              name="i-lucide-shopping-cart"
-              class="w-5 h-5 text-green-500"
-            />
-          </div>
-        </template>
-
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">
-            24
-          </span>
-          <span class="text-xs text-green-600 dark:text-green-400">
-            +8 new
-          </span>
-        </div>
-      </UCard>
-
-      <UCard>
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              Total Revenue
-            </span>
-            <UIcon
-              name="i-lucide-dollar-sign"
-              class="w-5 h-5 text-purple-500"   
-            />
-          </div>
-        </template>
-
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">
-            $12,456
-          </span>
-          <span class="text-xs text-green-600 dark:text-green-400">
-            +15% from last month
-          </span>
-        </div>
-      </UCard>
-
-      <UCard>
-        <template #header>
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              Total Users
-            </span>
-            <UIcon name="i-lucide-users" class="w-5 h-5 text-orange-500" />
-          </div>
-        </template>
-
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">
-            1,234
-          </span>
-          <span class="text-xs text-green-600 dark:text-green-400">
-            +45 new users
-          </span>
-        </div>
-      </UCard>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <DashboardStatCard
+        v-if="isStaff"
+        label="Usuarios visibles"
+        :value="stats?.users ?? 0"
+        icon="i-lucide-users"
+        :hint="isSuperuser ? 'Todos los roles' : 'Clientes, alumnos y afiliados'"
+      />
+      <DashboardStatCard
+        v-if="isStaff || role === 'cliente'"
+        :label="role === 'cliente' ? 'Mis servicios activos' : 'Servicios activos'"
+        :value="stats?.services ?? 0"
+        icon="i-lucide-package-check"
+        color="text-success"
+      />
+      <DashboardStatCard
+        v-if="isStaff || role === 'alumno'"
+        :label="role === 'alumno' ? 'Mis cursos activos' : 'Inscripciones activas'"
+        :value="stats?.courses ?? 0"
+        icon="i-lucide-book-open-check"
+        color="text-secondary"
+      />
+      <DashboardStatCard
+        label="Referidos"
+        :value="stats?.referredCount ?? 0"
+        icon="i-lucide-share-2"
+      />
+      <DashboardStatCard
+        label="Ganado por referidos"
+        :value="money(stats?.totalEarned ?? 0)"
+        icon="i-lucide-wallet"
+        color="text-success"
+      />
     </div>
 
-    <!-- Recent Activities Section -->
     <UCard>
       <template #header>
-        <div class="flex items-center justify-between">
-          <h2 class="text-lg font-semibold">Recent Activities</h2>
-          <UButton variant="ghost" color="neutral" label="View all" />
-        </div>
+        <h2 class="text-lg font-semibold">Accesos rápidos</h2>
       </template>
 
-      <div class="space-y-4">
-        <div
-          v-for="index in 3"
-          :key="index"
-          class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700 last:border-0"
-        >
-          <div class="flex items-center gap-3">
-            <UAvatar
-              :alt="`User ${index}`"
-              size="md"
-              :src="`https://github.com/user${index}.png`"
-            />
-            <div>
-              <p class="text-sm font-medium text-gray-900 dark:text-white">
-                User activity {{ index }}
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                {{ index }} hours ago
-              </p>
-            </div>
-          </div>
-          <UBadge variant="subtle">Active</UBadge>
-        </div>
+      <div class="flex flex-wrap gap-3">
+        <UButton icon="i-lucide-user" label="Mi perfil" :to="localePath('/dashboard/perfil')" variant="outline" color="neutral" />
+        <UButton icon="i-lucide-share-2" label="Mis referidos" :to="localePath('/dashboard/referidos')" variant="outline" color="neutral" />
+        <UButton v-if="isStaff" icon="i-lucide-users" label="Gestionar usuarios" :to="localePath('/dashboard/usuarios')" variant="outline" color="neutral" />
+        <UButton v-if="isSuperuser" icon="i-lucide-globe" label="Referidos globales" :to="localePath('/dashboard/referidos/global')" variant="outline" color="neutral" />
+        <UButton v-if="role === 'cliente'" icon="i-lucide-package" label="Mis servicios" :to="localePath('/dashboard/mis-servicios')" variant="outline" color="neutral" />
+        <UButton v-if="role === 'alumno'" icon="i-lucide-book-open" label="Mis cursos" :to="localePath('/dashboard/mis-cursos')" variant="outline" color="neutral" />
       </div>
     </UCard>
   </div>

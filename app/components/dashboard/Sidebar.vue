@@ -1,75 +1,9 @@
 <script setup lang="ts">
-import type {
-  CommandPaletteGroup,
-  CommandPaletteItem,
-  NavigationMenuItem,
-} from '@nuxt/ui';
-const items: NavigationMenuItem[][] = [
-  [
-    {
-      label: 'Inicio',
-      icon: 'i-lucide-house',
-      to: '/dashboard',
-      exact: true,
-    },
-    {
-      label: 'Productos',
-      icon: 'i-lucide-inbox',
-      badge: '4',
-      to: '/dashboard/products',
-      exact: false,
-    },
-    {
-      label: 'Contacts',
-      icon: 'i-lucide-users',
-    },
-    {
-      label: 'Settings',
-      icon: 'i-lucide-settings',
-      defaultOpen: true,
-      children: [
-        {
-          label: 'General',
-        },
-        {
-          label: 'Members',
-        },
-        {
-          label: 'Notifications',
-        },
-      ],
-    },
-  ],
-  [
-    {
-      label: 'Feedback',
-      icon: 'i-lucide-message-circle',
-      to: 'https://github.com/nuxt-ui-templates/dashboard',
-      target: '_blank',
-    },
-    {
-      label: 'Help & Support',
-      icon: 'i-lucide-info',
-      to: 'https://github.com/nuxt/ui',
-      target: '_blank',
-    },
-  ],
-];
-const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
-  {
-    label: 'Productos',
-    id: 'products',
-    highlightedIcon: 'i-lucide-box',
-    items: [
-      {
-        label: 'Nuevo Producto',
-        id: 'new-product',
-        icon: 'i-lucide-plus',
-        to: '/dashboard/products/new',
-      },
-    ],
-  },
-]);
+const { main, referrals, account } = useDashboardNav();
+const { profile, role } = useProfile();
+
+const roleLabel = computed(() => (role.value ? ROLE_LABELS[role.value] : ''));
+const displayName = computed(() => profile.value?.full_name || profile.value?.email || '');
 </script>
 
 <template>
@@ -78,65 +12,47 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
     resizable
     :ui="{ footer: 'border-t border-default' }"
   >
-    <template #header="{ collapsed }" class="flex items-center gap-2">
+    <template #header="{ collapsed }">
       <UDashboardSidebarCollapse variant="subtle" />
-      <IconsLogo class="h-6 w-auto" v-if="!collapsed" />
+      <IconsLogo v-if="!collapsed" class="h-6 w-auto" />
     </template>
 
     <template #default="{ collapsed }">
-      <UDashboardSearchButton />
-      <UDashboardSearch title="Buscar" :groups="searchGroups" />
-      <!-- <UButton
-        :label="collapsed ? undefined : 'Search...'"
-        icon="i-lucide-search"
-        color="neutral"
-        variant="outline"
-        block
-        :square="collapsed"
-      >
-        <template v-if="!collapsed" #trailing>
-          <div class="flex items-center gap-0.5 ms-auto">
-            <UKbd value="meta" variant="subtle" />
-            <UKbd value="K" variant="subtle" />
-          </div>
-        </template>
-      </UButton> -->
+      <UNavigationMenu
+        :collapsed="collapsed"
+        :items="main"
+        orientation="vertical"
+      />
+
+      <USeparator v-if="!collapsed" :label="$t('navReferrals')" class="my-2" />
 
       <UNavigationMenu
         :collapsed="collapsed"
-        :items="items[0]"
+        :items="referrals"
         orientation="vertical"
       />
 
       <UNavigationMenu
         :collapsed="collapsed"
-        :items="items[1]"
+        :items="account"
         orientation="vertical"
         class="mt-auto"
       />
-
-      <div class="">
-        <UDashboardSidebarCollapse
-          color="neutral"
-          variant="ghost"
-          square
-          class="w-full"
-          :title="collapsed ? 'Expandir' : 'Contraer'"
-        />
-      </div>
     </template>
 
     <template #footer="{ collapsed }">
-      <UButton
-        :avatar="{
-          src: 'https://github.com/benjamincanac.png',
-        }"
-        :label="collapsed ? undefined : 'Benjamin'"
-        color="neutral"
-        variant="ghost"
-        class="w-full"
-        :block="collapsed"
-      />
+      <div class="flex w-full items-center gap-2 overflow-hidden">
+        <UAvatar
+          :src="profile?.avatar_url || undefined"
+          :alt="displayName"
+          icon="i-lucide-user"
+          size="sm"
+        />
+        <div v-if="!collapsed" class="min-w-0 flex-1">
+          <p class="truncate text-sm font-medium">{{ displayName }}</p>
+          <p class="truncate text-xs text-muted">{{ roleLabel }}</p>
+        </div>
+      </div>
     </template>
   </UDashboardSidebar>
 </template>
