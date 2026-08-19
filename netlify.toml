@@ -1,0 +1,11 @@
+[build.environment]
+  # La URL y la clave publicable de Supabase son públicas por diseño: viajan al
+  # navegador en cada visita y lo que protege los datos es la RLS, no el secreto
+  # de la clave. Tienen que aparecer en el bundle, así que se excluyen del
+  # escáner de secretos.
+  #
+  # NUXT_SUPABASE_SECRET_KEY se deja fuera de esta lista a propósito: ésa sí es
+  # secreta y el escáner debe seguir vigilándola. Para que no acabe en el bundle,
+  # `runtimeConfig.supabase.secretKey` se declara vacío en nuxt.config.ts y Nitro
+  # la resuelve en cada arranque desde la variable de entorno.
+  SECRETS_SCAN_OMIT_KEYS = "NUXT_PUBLIC_SUPABASE_URL,NUXT_PUBLIC_SUPABASE_KEY"
