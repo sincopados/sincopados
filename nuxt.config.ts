@@ -40,6 +40,18 @@ export default defineNuxtConfig({
     defaultLocale: 'es',
   },
 
+  runtimeConfig: {
+    supabase: {
+      // Vacío a propósito. @nuxtjs/supabase lee `process.env.NUXT_SUPABASE_SECRET_KEY`
+      // en tiempo de build, y Nitro hornea `runtimeConfig` en el bundle del
+      // servidor: la secret key acabaría escrita en claro en `nitro.mjs`.
+      // Declararla aquí como cadena vacía gana sobre ese valor por defecto, y
+      // Nitro la rellena en cada arranque desde la variable de entorno.
+      secretKey: '',
+      serviceKey: '',
+    },
+  },
+
   supabase: {
     // Sólo el dashboard exige sesión; el sitio público sigue siendo anónimo.
     redirect: true,
