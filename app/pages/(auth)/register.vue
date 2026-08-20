@@ -16,6 +16,13 @@ const loading = ref(false);
 
 // Permite llegar desde un enlace de referido: /register?ref=ABC12345
 const referralFromLink = String(route.query.ref ?? '').toUpperCase();
+const referralCookie = useReferralCookie();
+
+// El código se guarda en cuanto se abre la página: con OAuth el formulario nunca
+// llega a enviarse, así que la cookie es lo único que sobrevive al viaje a Google.
+if (referralFromLink) {
+  referralCookie.value = referralFromLink;
+}
 
 const fields: AuthFormField[] = [{
   name: 'name',
@@ -44,6 +51,10 @@ const fields: AuthFormField[] = [{
 }];
 
 const signUpWithProvider = async (provider: 'google' | 'github') => {
+  if (referralFromLink) {
+    referralCookie.value = referralFromLink;
+  }
+
   const { error } = await client.auth.signInWithOAuth({
     provider,
     options: { redirectTo: `${window.location.origin}${localePath('/confirm')}` }
@@ -97,6 +108,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     return;
   }
 
+  referralCookie.value = null;
   toast.add({ title: t('registerSuccess'), description: t('registerSuccessDescription'), color: 'success' });
   await navigateTo(localePath('/login'));
 };
