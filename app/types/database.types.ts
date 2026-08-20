@@ -22,6 +22,7 @@ export type Database = {
           currency: string
           ends_at: string | null
           id: string
+          manager_id: string | null
           notes: string | null
           service_id: string
           starts_at: string
@@ -35,6 +36,7 @@ export type Database = {
           currency?: string
           ends_at?: string | null
           id?: string
+          manager_id?: string | null
           notes?: string | null
           service_id: string
           starts_at?: string
@@ -48,6 +50,7 @@ export type Database = {
           currency?: string
           ends_at?: string | null
           id?: string
+          manager_id?: string | null
           notes?: string | null
           service_id?: string
           starts_at?: string
@@ -65,6 +68,20 @@ export type Database = {
           {
             foreignKeyName: "client_services_client_id_fkey"
             columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "referral_summary"
+            referencedColumns: ["profile_id"]
+          },
+          {
+            foreignKeyName: "client_services_manager_id_fkey"
+            columns: ["manager_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_services_manager_id_fkey"
+            columns: ["manager_id"]
             isOneToOne: false
             referencedRelation: "referral_summary"
             referencedColumns: ["profile_id"]
@@ -335,40 +352,58 @@ export type Database = {
       }
       services: {
         Row: {
+          carousel_count: number
           commission_rate: number
           created_at: string
           currency: string
           description: string | null
           id: string
+          image_count: number
           is_active: boolean
+          manages_social: boolean
           name: string
           price: number
+          shooting_hours: number
           slug: string
+          social_networks: Database["public"]["Enums"]["social_network"][]
           updated_at: string
+          video_count: number
         }
         Insert: {
+          carousel_count?: number
           commission_rate?: number
           created_at?: string
           currency?: string
           description?: string | null
           id?: string
+          image_count?: number
           is_active?: boolean
+          manages_social?: boolean
           name: string
           price?: number
+          shooting_hours?: number
           slug: string
+          social_networks?: Database["public"]["Enums"]["social_network"][]
           updated_at?: string
+          video_count?: number
         }
         Update: {
+          carousel_count?: number
           commission_rate?: number
           created_at?: string
           currency?: string
           description?: string | null
           id?: string
+          image_count?: number
           is_active?: boolean
+          manages_social?: boolean
           name?: string
           price?: number
+          shooting_hours?: number
           slug?: string
+          social_networks?: Database["public"]["Enums"]["social_network"][]
           updated_at?: string
+          video_count?: number
         }
         Relationships: []
       }
@@ -396,6 +431,13 @@ export type Database = {
       enrollment_status: "activo" | "completado" | "cancelado"
       referral_status: "pendiente" | "aprobado" | "pagado" | "anulado"
       service_status: "activo" | "finalizado" | "cancelado"
+      social_network:
+        | "facebook"
+        | "instagram"
+        | "tiktok"
+        | "linkedin"
+        | "x"
+        | "youtube"
       user_role: "superusuario" | "tutor" | "cliente" | "alumno" | "afiliado"
     }
     CompositeTypes: {
@@ -527,6 +569,14 @@ export const Constants = {
       enrollment_status: ["activo", "completado", "cancelado"],
       referral_status: ["pendiente", "aprobado", "pagado", "anulado"],
       service_status: ["activo", "finalizado", "cancelado"],
+      social_network: [
+        "facebook",
+        "instagram",
+        "tiktok",
+        "linkedin",
+        "x",
+        "youtube",
+      ],
       user_role: ["superusuario", "tutor", "cliente", "alumno", "afiliado"],
     },
   },
