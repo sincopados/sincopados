@@ -11,6 +11,7 @@ export type UserRole = Enums<'user_role'>
 export type ReferralStatus = Enums<'referral_status'>
 export type EnrollmentStatus = Enums<'enrollment_status'>
 export type ServiceStatus = Enums<'service_status'>
+export type SocialNetwork = Enums<'social_network'>
 
 export type Profile = Tables<'profiles'>
 export type Service = Tables<'services'>

@@ -17,17 +17,19 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   ssr: true,
 
-  app:{
+  app: {
+    // Título y descripción de reserva: las páginas públicas definen los suyos
+    // con `useSeoMeta` y las claves `seoMeta*` de i18n.
     head: {
-      title: 'NEUROFIT - brain',
+      title: 'Sincopados',
       meta: [
         {
           name: 'description',
-          content: 'Programa identificación y tratamiento de el ansaimer',
-        }
+          content: 'Sincopados Producciones Audiovisuales: producción de video y estrategia de redes sociales en Medellín.',
+        },
+        { property: 'og:site_name', content: 'Sincopados' },
       ],
     },
-
   },
     
   i18n: {

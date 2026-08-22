@@ -2,15 +2,15 @@
 
 const { t } = useI18n()
 useSeoMeta({
-    title: t('seoMetaRedesSocialesTitle'),
+    title: t('seoMetaVideosYoutubeTitle'),
     description: t('seoMetaVideosYoutubeDescription'),
-    ogTitle: t('seoMetaRedesSocialesTitle'),
+    ogTitle: t('seoMetaVideosYoutubeTitle'),
     ogDescription: t('seoMetaVideosYoutubeDescription'),
     ogType: 'website',
     ogUrl:'https://sincopados.com',
     ogImage: '/Logo-Sincopados-Golden.png',
     twitterCard: 'summary_large_image',
-    twitterTitle: t('seoMetaRedesSocialesTitle'),
+    twitterTitle: t('seoMetaVideosYoutubeTitle'),
     twitterDescription: t('seoMetaVideosYoutubeDescription'),
     twitterImage: '/Logo-Sincopados-Golden.png'
 });
