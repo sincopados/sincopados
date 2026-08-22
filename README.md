@@ -1,6 +1,10 @@
-# Nuxt Minimal Starter
+# Sincopados
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Sitio y panel de gestión de Sincopados Producciones Audiovisuales, construido con
+Nuxt, Nuxt UI y Supabase.
+
+Consulta la [documentación de Nuxt](https://nuxt.com/docs/getting-started/introduction)
+para el detalle del framework.
 
 ## Setup
 
