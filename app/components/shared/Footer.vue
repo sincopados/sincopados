@@ -3,6 +3,10 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 
 const items: NavigationMenuItem[] = [
   {
+    label: 'Manual de Marca',
+    to: '/manual-de-marca'
+  },
+  {
     label: 'Figma Kit',
     to: 'https://go.nuxt.com/figma-ui',
     target: '_blank'

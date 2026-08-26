@@ -1,9 +1,9 @@
   <script setup lang="ts">
-  import type { NavigationMenuItem, DropdownMenuItem, SelectMenuItem } from '@nuxt/ui';
+  import type { NavigationMenuItem, DropdownMenuItem } from '@nuxt/ui';
 
   const route = useRoute();
 
-  const { locale, locales, setLocale } = useI18n()
+  const { locale, setLocale } = useI18n()
 
 
   const languageItems = ref<DropdownMenuItem[]>([
@@ -79,20 +79,10 @@
 
     }
   ]);
-  const  iconText = ref(languagesBase[0])
-
-  const iconLanguage = computed(()=> {
-    if (locale.value === 'en') {
-      iconText.value = languagesBase[1]
-    } else if(locale.value === 'nl') {
-      iconText.value = languagesBase[2]
-    } else if(locale.value === 'fr') {
-      iconText.value = languagesBase[3]
-    } else {
-      iconText.value = languagesBase[0]
-    }
-    return iconText.value?.icon
-  })
+  // Bandera y código del idioma activo, derivados de `locale`.
+  const currentLanguage = computed(
+    () => languagesBase.find(language => language.value === locale.value) ?? languagesBase[0]!
+  )
 
   </script>
 
@@ -120,14 +110,11 @@
             side: 'bottom',
             sideOffset: 8
           }"
-           onSelect() {
-            iconLanguage()
-           }
           :ui="{
             content: 'w-48'
           }"
         >
-          <UButton :label="iconText?.code" :icon="iconLanguage" color="neutral" variant="outline" />
+          <UButton :label="currentLanguage.code" :icon="currentLanguage.icon" color="neutral" variant="outline" />
         </UDropdownMenu>
       </template>
       <template #body>
