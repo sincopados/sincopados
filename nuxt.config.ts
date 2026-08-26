@@ -32,6 +32,13 @@ export default defineNuxtConfig({
     },
   },
     
+  fonts: {
+    families: [
+      // Fuente oficial del Manual de Marca.
+      { name: 'Roboto Condensed', provider: 'google', weights: [300, 400, 500, 700] },
+    ],
+  },
+
   i18n: {
     locales: [
       { code: 'es', language: 'es-ES', name:'Español',file: 'es.json' },
