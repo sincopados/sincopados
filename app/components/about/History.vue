@@ -15,8 +15,24 @@
       </div>
     </div>
     <div class="relative flex justify-center lg:justify-end">
-      <img src="https://picsum.photos/400/500?grayscale" class="rounded-3xl border border-zinc-800 shadow-2xl w-2/3 rotate-[-3deg] hover:rotate-0 transition-transform duration-500" />
-      <img src="https://picsum.photos/350/450" class="absolute -bottom-10 -left-4 lg:-left-10 rounded-3xl border-4 border-primary shadow-2xl w-1/2 rotate-[5deg] hover:rotate-0 transition-transform duration-500" />
+      <NuxtPicture
+        src="https://picsum.photos/400/500?grayscale"
+        alt=""
+        class="block w-2/3 rotate-[-3deg] overflow-hidden rounded-3xl border border-zinc-800 shadow-2xl transition-transform duration-500 hover:rotate-0"
+        :img-attrs="{ class: 'h-auto w-full' }"
+        sizes="lg:60vw 2xl:30vw"
+        loading="lazy"
+        decoding="async"
+      />
+      <NuxtPicture
+        src="https://picsum.photos/350/450"
+        alt=""
+        class="absolute -bottom-10 -left-4 block w-1/2 rotate-[5deg] overflow-hidden rounded-3xl border-4 border-primary shadow-2xl transition-transform duration-500 hover:rotate-0 lg:-left-10"
+        :img-attrs="{ class: 'h-auto w-full' }"
+        sizes="lg:45vw 2xl:22vw"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </section>
 </template>

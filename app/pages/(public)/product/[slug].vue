@@ -105,11 +105,14 @@ const totalPrice = computed(() => {
       <div class="space-y-4">
         <!-- Main Image -->
         <div class="rounded-lg overflow-hidden bg-gray-100">
-          <img
+          <NuxtPicture
             :src="product.images[selectedImageIndex]"
             :alt="product.name"
-            class="w-full h-96 object-cover"
+            class="block h-96 w-full"
+            :img-attrs="{ class: 'size-full object-cover' }"
+            sizes="lg:90vw 2xl:45vw"
             loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -126,10 +129,14 @@ const totalPrice = computed(() => {
                 : 'border-gray-200 hover:border-gray-300'
             "
           >
-            <img
+            <NuxtPicture
               :src="image"
               :alt="`${product.name} - Image ${index + 1}`"
-              class="w-full h-24 object-cover"
+              class="block h-24 w-full"
+              :img-attrs="{ class: 'size-full object-cover' }"
+              sizes="lg:30vw 2xl:15vw"
+              loading="lazy"
+              decoding="async"
             />
           </button>
         </div>
