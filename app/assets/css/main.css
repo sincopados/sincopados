@@ -28,3 +28,7 @@
   --color-brand-900: #5F4C00;
   --color-brand-950: #423500;
 }
+@theme static {
+  /* Tipografía oficial de marca (Manual de Marca: Roboto Condensed Bold) */
+  --font-condensed: 'Roboto Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
+}

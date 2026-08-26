@@ -32,6 +32,28 @@ export default defineNuxtConfig({
     },
   },
     
+  image: {
+    // IPX genera las variantes responsive y las sirve en WebP; el formato
+    // original queda como respaldo en el `<picture>`.
+    //
+    // Sin AVIF a propósito: las fotos de `public/marca/aplicaciones/` ya son
+    // WebP con pérdida, y re-codificarlas a AVIF las engordaba (8,5 KB frente
+    // a 6,6 KB a 461 px), de modo que el navegador habría elegido la variante
+    // más pesada.
+    format: ['webp'],
+    quality: 80,
+    // Hosts remotos que se pueden optimizar. Las portadas de curso llegan de
+    // URLs arbitrarias, así que se sirven sin transformar.
+    domains: ['picsum.photos'],
+  },
+
+  fonts: {
+    families: [
+      // Fuente oficial del Manual de Marca.
+      { name: 'Roboto Condensed', provider: 'google', weights: [300, 400, 500, 700] },
+    ],
+  },
+
   i18n: {
     locales: [
       { code: 'es', language: 'es-ES', name:'Español',file: 'es.json' },

@@ -27,11 +27,16 @@ const links = ref<ButtonProps[]>([
     :links="links"
     class="my-4"
   >
-    <img
+    <NuxtPicture
       src="/home-social-media-medellin.png"
       alt="Illustration"
-      class="w-96 rounded-lg"
+      class="block w-96"
+      :img-attrs="{ class: 'h-auto w-full rounded-lg' }"
+      :width="373"
+      :height="669"
+      densities="1x"
       loading="lazy"
+      decoding="async"
     />
     <template #top>
         <h1 class="flex flex-col items-center justify-center text-6xl font-bold mt-12">Video Marketing en Medellín</h1>

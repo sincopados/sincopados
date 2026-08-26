@@ -7,10 +7,14 @@ defineProps<{
 
 <template>
   <UCard class="w-full" :ui="{ body: 'px-20' }">
-    <img
+    <NuxtPicture
       :src="product.images[0]"
       alt="Product Image"
-      class="w-full h-52 object-cover rounded-md"
+      class="block h-52 w-full overflow-hidden rounded-md"
+      :img-attrs="{ class: 'size-full object-cover' }"
+      sizes="sm:90vw lg:45vw 2xl:30vw"
+      loading="lazy"
+      decoding="async"
     />
 
     <div class="mt-4">

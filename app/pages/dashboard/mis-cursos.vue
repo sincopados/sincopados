@@ -49,11 +49,15 @@ const { data: items, status } = await useAsyncData<ActiveEnrollment[]>('my-cours
     <div v-else class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <UCard v-for="item in items" :key="item.id">
         <template #header>
-          <NuxtImg
+          <NuxtPicture
             v-if="item.courses?.cover_url"
             :src="item.courses.cover_url"
             :alt="item.courses?.title ?? ''"
-            class="mb-3 h-32 w-full rounded-md object-cover"
+            class="mb-3 block h-32 w-full overflow-hidden rounded-md"
+            :img-attrs="{ class: 'size-full object-cover' }"
+            sizes="sm:90vw lg:45vw 2xl:30vw"
+            loading="lazy"
+            decoding="async"
           />
           <h2 class="font-semibold">{{ item.courses?.title ?? 'Curso' }}</h2>
         </template>

@@ -31,9 +31,14 @@ const founders = ref([
       >
         <div class="relative overflow-hidden rounded-[2.5rem] aspect-[4/5] border border-zinc-800 group-hover:border-primary-500 transition-all duration-500 shadow-xl">
           <Transition name="fade">
-            <img 
-              :src="founder.showAlt ? founder.imgAlt : founder.imgMain" 
-              class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+            <NuxtPicture
+              :src="founder.showAlt ? founder.imgAlt : founder.imgMain"
+              :alt="founder.name"
+              class="absolute inset-0 block size-full grayscale transition-all duration-700 group-hover:grayscale-0"
+              :img-attrs="{ class: 'size-full object-cover' }"
+              sizes="md:90vw 2xl:45vw"
+              loading="lazy"
+              decoding="async"
             />
           </Transition>
         </div>
