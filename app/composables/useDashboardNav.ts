@@ -22,6 +22,8 @@ export const useDashboardNav = () => {
     const items: NavigationMenuItem[] = [link('Inicio', 'i-lucide-house', '/dashboard', true)]
 
     if (current === 'superusuario' || current === 'tutor') {
+      // El filtro por rol vive en la propia tabla de usuarios: tenerlo también
+      // aquí alargaba la barra con seis entradas que hacen lo mismo.
       items.push({
         label: 'Usuarios',
         icon: 'i-lucide-users',
@@ -29,23 +31,26 @@ export const useDashboardNav = () => {
         children: [
           link('Todos los usuarios', 'i-lucide-list', '/dashboard/usuarios', true),
           link('Crear usuario', 'i-lucide-user-plus', '/dashboard/usuarios/nuevo'),
-          link('Clientes', 'i-lucide-briefcase', '/dashboard/usuarios/rol/cliente'),
-          link('Alumnos', 'i-lucide-graduation-cap', '/dashboard/usuarios/rol/alumno'),
-          link('Afiliados', 'i-lucide-handshake', '/dashboard/usuarios/rol/afiliado'),
-          ...(current === 'superusuario'
-            ? [
-                link('Tutores', 'i-lucide-user-cog', '/dashboard/usuarios/rol/tutor'),
-                link('Superusuarios', 'i-lucide-shield', '/dashboard/usuarios/rol/superusuario'),
-              ]
-            : []),
         ],
       })
       items.push(link('Cursos', 'i-lucide-book-open', '/dashboard/cursos'))
-      items.push(link('Servicios contratados', 'i-lucide-route', '/dashboard/servicios-contratados'))
     }
 
     if (current === 'superusuario') {
-      items.push(link('Servicios', 'i-lucide-package', '/dashboard/servicios'))
+      items.push({
+        label: 'Servicios',
+        icon: 'i-lucide-package',
+        defaultOpen: true,
+        children: [
+          link('Catálogo', 'i-lucide-box', '/dashboard/servicios', true),
+          link('Contratados', 'i-lucide-route', '/dashboard/servicios-contratados'),
+        ],
+      })
+    }
+    else if (current === 'tutor') {
+      // El tutor no administra el catálogo, así que sólo ve lo contratado y no
+      // necesita un grupo desplegable para una única entrada.
+      items.push(link('Servicios contratados', 'i-lucide-route', '/dashboard/servicios-contratados'))
     }
 
     if (current === 'cliente') {
