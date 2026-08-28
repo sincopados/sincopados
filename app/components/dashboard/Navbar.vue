@@ -28,6 +28,12 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
   ];
 });
 
+/** Último tramo de la miga: es lo único que cabe en la cabecera de móvil. */
+const currentCrumb = computed(() => {
+  const items = breadcrumbItems.value;
+  return items[items.length - 1]?.label ?? '';
+});
+
 const userMenuItems = computed<DropdownMenuItem[][]>(() => {
   if (!user.value) {
     return [[
@@ -53,18 +59,37 @@ const userMenuItems = computed<DropdownMenuItem[][]>(() => {
 
 <template>
   <div class="sticky top-0 z-10 border-b border-default bg-primary/10">
-    <div class="flex items-center justify-between gap-4 px-6 py-4">
+    <div class="flex items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6 sm:py-4">
+      <!-- Sin este botón la barra lateral es inalcanzable en móvil: el
+           componente ya trae `lg:hidden`, así que sólo aparece donde hace falta. -->
+      <UDashboardSidebarToggle class="-ms-1" />
+
       <UBreadcrumb
         :items="breadcrumbItems"
-        :ui="{ list: 'text-sm font-medium capitalize' }"
+        :ui="{
+          root: 'min-w-0',
+          list: 'text-sm font-medium capitalize flex-nowrap',
+          item: 'truncate',
+        }"
+        class="hidden min-w-0 sm:flex"
       />
 
-      <div class="ms-auto flex items-center gap-4">
-        <UBadge v-if="roleLabel" :color="role ? ROLE_COLORS[role] : 'neutral'" variant="subtle">
+      <!-- En móvil la miga completa no cabe: se deja sólo el tramo actual. -->
+      <p class="min-w-0 flex-1 truncate text-sm font-medium capitalize sm:hidden">
+        {{ currentCrumb }}
+      </p>
+
+      <div class="ms-auto flex shrink-0 items-center gap-2 sm:gap-4">
+        <UBadge
+          v-if="roleLabel"
+          :color="role ? ROLE_COLORS[role] : 'neutral'"
+          variant="subtle"
+          class="hidden sm:inline-flex"
+        >
           {{ roleLabel }}
         </UBadge>
 
-        <USeparator orientation="vertical" class="h-6" />
+        <USeparator orientation="vertical" class="hidden h-6 sm:block" />
 
         <UDropdownMenu :items="userMenuItems" :content="{ align: 'end' }">
           <UButton
@@ -74,6 +99,7 @@ const userMenuItems = computed<DropdownMenuItem[][]>(() => {
             variant="ghost"
             trailing-icon="i-lucide-chevron-down"
             :label="user ? (profile?.full_name || $t('account')) : $t('loginTitle')"
+            :ui="{ label: 'hidden sm:inline' }"
           />
         </UDropdownMenu>
       </div>

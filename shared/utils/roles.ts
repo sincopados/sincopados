@@ -26,6 +26,14 @@ export const ROLE_COLORS: Record<UserRole, 'primary' | 'secondary' | 'success' |
   afiliado: 'neutral',
 }
 
+export const ROLE_ICONS: Record<UserRole, string> = {
+  superusuario: 'i-lucide-shield',
+  tutor: 'i-lucide-user-cog',
+  cliente: 'i-lucide-briefcase',
+  alumno: 'i-lucide-graduation-cap',
+  afiliado: 'i-lucide-handshake',
+}
+
 /** Roles que un tutor puede crear, editar y eliminar. */
 export const TUTOR_MANAGED_ROLES: readonly UserRole[] = ['cliente', 'alumno', 'afiliado']
 

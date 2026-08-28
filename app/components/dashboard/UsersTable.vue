@@ -16,6 +16,27 @@ const { role: actorRole, profile: actorProfile } = useProfile();
 const search = ref('');
 const deletingId = ref<string | null>(null);
 
+/**
+ * Filtro por tipo de usuario. Sustituye a las seis entradas que había en la
+ * barra lateral. Cuando la página fija un rol (`/usuarios/rol/...`) el selector
+ * no se muestra y esta tabla se comporta como antes.
+ */
+const roleFilter = ref<UserRole | 'todos'>(props.role ?? 'todos');
+
+watch(() => props.role, (next) => {
+  roleFilter.value = next ?? 'todos';
+});
+
+/** Sólo se ofrecen los roles que el actor puede administrar. */
+const roleItems = computed(() => [
+  { label: 'Todos los roles', value: 'todos' as const, icon: 'i-lucide-users' },
+  ...manageableRoles(actorRole.value).map(role => ({
+    label: `${ROLE_LABELS[role]}s`,
+    value: role,
+    icon: ROLE_ICONS[role],
+  })),
+]);
+
 const { data: users, status, refresh } = await useAsyncData<Profile[]>(
   () => `users-${props.role ?? 'all'}`,
   async () => {
@@ -33,12 +54,15 @@ const { data: users, status, refresh } = await useAsyncData<Profile[]>(
 
 const rows = computed(() => {
   const term = search.value.trim().toLowerCase();
-  if (!term) return users.value ?? [];
+  const wanted = roleFilter.value;
 
-  return (users.value ?? []).filter(user =>
-    [user.full_name, user.email, user.referral_code]
-      .some(field => field?.toLowerCase().includes(term)),
-  );
+  return (users.value ?? []).filter((user) => {
+    if (wanted !== 'todos' && user.role !== wanted) return false;
+    if (!term) return true;
+
+    return [user.full_name, user.email, user.referral_code]
+      .some(field => field?.toLowerCase().includes(term));
+  });
 });
 
 const removeUser = async (user: Profile) => {
@@ -141,18 +165,30 @@ const columns: TableColumn<Profile>[] = [
         v-model="search"
         icon="i-lucide-search"
         placeholder="Buscar por nombre, correo o código"
-        class="max-w-sm flex-1"
+        class="min-w-48 max-w-sm flex-1"
       />
+
+      <USelectMenu
+        v-if="!props.role"
+        v-model="roleFilter"
+        :items="roleItems"
+        value-key="value"
+        :icon="roleFilter === 'todos' ? 'i-lucide-users' : ROLE_ICONS[roleFilter]"
+        class="w-full sm:w-52"
+      />
+
       <UButton
         icon="i-lucide-refresh-cw"
         color="neutral"
         variant="outline"
         :loading="status === 'pending'"
+        aria-label="Actualizar la lista"
         @click="refresh()"
       />
       <UButton
         icon="i-lucide-user-plus"
         label="Crear usuario"
+        class="max-sm:grow"
         :to="localePath('/dashboard/usuarios/nuevo')"
       />
     </div>
