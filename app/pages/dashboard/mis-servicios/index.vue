@@ -9,7 +9,9 @@ definePageMeta({
 const client = useSupabaseClient<Database>();
 const userId = useAuthUserId();
 
-type Acquired = ClientService & { services: Pick<Service, 'name' | 'description' | 'slug'> | null }
+type Acquired = ClientService & {
+  services: Pick<Service, 'name' | 'description' | 'slug' | 'manages_social'> | null
+}
 
 // La RLS ya limita la consulta a `client_id = auth.uid()`; el filtro explícito
 // mantiene el índice en uso y hace evidente la intención.
@@ -18,7 +20,7 @@ const { data: items, status } = await useAsyncData<Acquired[]>('my-services', as
 
   const { data, error } = await client
     .from('client_services')
-    .select('*, services(name, description, slug)')
+    .select('*, services(name, description, slug, manages_social)')
     .eq('client_id', userId.value)
     .order('starts_at', { ascending: false });
 
@@ -28,6 +30,9 @@ const { data: items, status } = await useAsyncData<Acquired[]>('my-services', as
 
 const money = (value: number, currency = 'COP') =>
   new Intl.NumberFormat('es-CO', { style: 'currency', currency, maximumFractionDigits: 0 }).format(value);
+
+const localePath = useLocalePath();
+const open = (id: string) => navigateTo(localePath(`/dashboard/mis-servicios/${id}`));
 
 const statusColor = (value: ClientService['status']) =>
   value === 'activo' ? 'success' : value === 'finalizado' ? 'neutral' : 'error';
@@ -54,7 +59,16 @@ const statusColor = (value: ClientService['status']) =>
     />
 
     <div v-else class="grid gap-4 md:grid-cols-2">
-      <UCard v-for="item in items" :key="item.id">
+      <UCard
+        v-for="item in items"
+        :key="item.id"
+        class="cursor-pointer transition-shadow hover:ring-2 hover:ring-primary/40"
+        role="link"
+        tabindex="0"
+        @click="open(item.id)"
+        @keydown.enter="open(item.id)"
+        @keydown.space.prevent="open(item.id)"
+      >
         <template #header>
           <div class="flex items-start justify-between gap-3">
             <h2 class="font-semibold">{{ item.services?.name ?? 'Servicio' }}</h2>
@@ -80,6 +94,18 @@ const statusColor = (value: ClientService['status']) =>
             <dd class="font-medium">{{ new Date(item.ends_at).toLocaleDateString('es-CO') }}</dd>
           </div>
         </dl>
+
+        <template #footer>
+          <div class="flex items-center justify-between gap-3 text-sm">
+            <span class="text-muted">
+              {{ (item.services?.manages_social ? SERVICE_STAGES : BASE_SERVICE_STAGES).length }} etapas de seguimiento
+            </span>
+            <span class="flex items-center gap-1 font-medium text-primary">
+              Ver trazabilidad
+              <UIcon name="i-lucide-arrow-right" class="size-4" />
+            </span>
+          </div>
+        </template>
       </UCard>
     </div>
   </div>

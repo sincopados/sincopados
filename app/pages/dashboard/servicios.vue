@@ -2,7 +2,7 @@
 import * as z from 'zod';
 import type { FormSubmitEvent, TableColumn } from '@nuxt/ui';
 import { UBadge, UButton, UDropdownMenu, UIcon } from '#components';
-import type { Database, Profile, Service, SocialNetwork } from '~/types/db';
+import type { Database, Profile, Service } from '~/types/db';
 
 definePageMeta({
   middleware: 'role',
@@ -39,93 +39,80 @@ const { data: managers } = await useAsyncData<Profile[]>('managers', async () =>
   return data ?? [];
 });
 
-/* --- Alta de servicios en el catálogo --- */
+/* --- Alta y edición de servicios en el catálogo --- */
 
-// El slug ya no se escribe: se deriva del nombre, así que no entra en el esquema.
-const serviceSchema = z.object({
-  name: z.string().min(2, 'Mínimo 2 caracteres').max(120),
-  description: z.string().max(500).optional().or(z.literal('')),
-  price: z.number().min(0),
-  commission_rate: z.number().min(0).max(100),
-  video_count: z.number().int().min(0).max(999),
-  image_count: z.number().int().min(0).max(999),
-  carousel_count: z.number().int().min(0).max(999),
-  shooting_hours: z.number().min(0).max(9999),
-  manages_social: z.boolean(),
-  social_networks: z.array(z.enum(SOCIAL_NETWORKS)),
-});
-
-type ServiceSchema = z.output<typeof serviceSchema>
-
-const emptyService = () => ({
-  name: '',
-  description: '',
-  price: 0,
-  commission_rate: 10,
-  video_count: 0,
-  image_count: 0,
-  carousel_count: 0,
-  shooting_hours: 0,
-  manages_social: false,
-  social_networks: [] as SocialNetwork[],
-});
-
-const serviceState = reactive(emptyService());
+// El esquema, el estado y la traducción a columnas viven en `useServiceForm`,
+// compartidos con el formulario que renderiza ambos modales.
+const serviceInitial = ref(emptyServiceForm());
 const creating = ref(false);
 const modalOpen = ref(false);
 
-// El slug se deriva del nombre en vivo; se muestra sólo para que se vea qué se
-// va a guardar. La unicidad la garantiza el índice de Postgres, no esto.
-const derivedSlug = computed(() => slugify(serviceState.name));
+// Servicio en edición. `null` significa que el modal de edición está cerrado.
+const editing = ref<Service | null>(null);
+const editInitial = ref(emptyServiceForm());
+const saving = ref(false);
 
-const toggleNetwork = (network: SocialNetwork) => {
-  const current = serviceState.social_networks;
-  serviceState.social_networks = current.includes(network)
-    ? current.filter(n => n !== network)
-    : [...current, network];
-};
-
-// Apagar el manejo de redes limpia la selección: la base de datos rechaza la
-// combinación incoherente con un CHECK, así que conviene no llegar a enviarla.
-watch(() => serviceState.manages_social, (enabled) => {
-  if (!enabled) serviceState.social_networks = [];
+const editModalOpen = computed({
+  get: () => editing.value !== null,
+  set: (open: boolean) => {
+    if (!open) editing.value = null;
+  },
 });
+
+/** Un choque de clave única sólo puede venir del slug, derivado del nombre. */
+const duplicateNameError = (name: string) => `Ya existe un servicio llamado "${name}".`;
+
+const openEditor = (service: Service) => {
+  editInitial.value = serviceToForm(service);
+  editing.value = service;
+};
 
 const createService = async (event: FormSubmitEvent<ServiceSchema>) => {
   creating.value = true;
 
-  const { error } = await client.from('services').insert({
-    name: event.data.name,
-    slug: derivedSlug.value,
-    description: event.data.description || null,
-    price: event.data.price,
-    commission_rate: event.data.commission_rate / 100,
-    video_count: event.data.video_count,
-    image_count: event.data.image_count,
-    carousel_count: event.data.carousel_count,
-    shooting_hours: event.data.shooting_hours,
-    manages_social: event.data.manages_social,
-    social_networks: event.data.manages_social ? event.data.social_networks : [],
-  });
+  const { error } = await client.from('services').insert(formToService(event.data));
 
   creating.value = false;
 
   if (error) {
-    // Con el slug automático, un choque de clave única significa que ya existe
-    // un servicio con ese mismo nombre.
     toast.add({
       title: 'No se pudo crear el servicio',
-      description: error.code === '23505'
-        ? `Ya existe un servicio llamado "${event.data.name}".`
-        : error.message,
+      description: error.code === '23505' ? duplicateNameError(event.data.name) : error.message,
       color: 'error',
     });
     return;
   }
 
-  Object.assign(serviceState, emptyService());
+  serviceInitial.value = emptyServiceForm();
   modalOpen.value = false;
   toast.add({ title: 'Servicio creado', color: 'success' });
+  await refresh();
+};
+
+const updateService = async (event: FormSubmitEvent<ServiceSchema>) => {
+  const target = editing.value;
+  if (!target) return;
+
+  saving.value = true;
+
+  const { error } = await client
+    .from('services')
+    .update(formToService(event.data))
+    .eq('id', target.id);
+
+  saving.value = false;
+
+  if (error) {
+    toast.add({
+      title: 'No se pudo actualizar el servicio',
+      description: error.code === '23505' ? duplicateNameError(event.data.name) : error.message,
+      color: 'error',
+    });
+    return;
+  }
+
+  editing.value = null;
+  toast.add({ title: 'Servicio actualizado', color: 'success' });
   await refresh();
 };
 
@@ -284,6 +271,11 @@ const columns: TableColumn<Service>[] = [
       h(UDropdownMenu, {
         items: [[
           {
+            label: 'Editar',
+            icon: 'i-lucide-pencil',
+            onSelect: () => openEditor(row.original),
+          },
+          {
             label: row.original.is_active ? 'Desactivar' : 'Activar',
             icon: row.original.is_active ? 'i-lucide-eye-off' : 'i-lucide-eye',
             onSelect: () => toggleActive(row.original),
@@ -321,94 +313,26 @@ const columns: TableColumn<Service>[] = [
         <UButton icon="i-lucide-plus" label="Nuevo servicio" />
 
         <template #body>
-          <UForm :schema="serviceSchema" :state="serviceState" class="space-y-5" @submit="createService">
-            <div class="space-y-4">
-              <UFormField label="Nombre" name="name" required>
-                <UInput v-model="serviceState.name" class="w-full" placeholder="4 Videos TikTok" />
-              </UFormField>
-
-              <UFormField
-                label="Identificador"
-                help="Se genera solo a partir del nombre."
-              >
-                <UInput
-                  :model-value="derivedSlug"
-                  disabled
-                  class="w-full font-mono"
-                  placeholder="se-genera-del-nombre"
-                />
-              </UFormField>
-
-              <UFormField label="Descripción" name="description">
-                <UTextarea v-model="serviceState.description" class="w-full" :rows="3" />
-              </UFormField>
-            </div>
-
-            <USeparator label="Qué incluye" />
-
-            <div class="grid grid-cols-2 gap-4">
-              <UFormField label="Número de videos" name="video_count">
-                <UInputNumber v-model="serviceState.video_count" :min="0" class="w-full" />
-              </UFormField>
-
-              <UFormField label="Número de imágenes" name="image_count">
-                <UInputNumber v-model="serviceState.image_count" :min="0" class="w-full" />
-              </UFormField>
-
-              <UFormField label="Número de carruseles" name="carousel_count">
-                <UInputNumber v-model="serviceState.carousel_count" :min="0" class="w-full" />
-              </UFormField>
-
-              <UFormField label="Horas de rodaje" name="shooting_hours">
-                <UInputNumber v-model="serviceState.shooting_hours" :min="0" :step="0.5" class="w-full" />
-              </UFormField>
-            </div>
-
-            <USeparator label="Redes sociales" />
-
-            <UFormField name="manages_social">
-              <USwitch
-                v-model="serviceState.manages_social"
-                label="Incluye manejo de redes"
-                :description="serviceState.manages_social
-                  ? 'Elige en cuáles se publica.'
-                  : 'Actívalo para elegir las redes incluidas.'"
-              />
-            </UFormField>
-
-            <UFormField v-if="serviceState.manages_social" name="social_networks">
-              <div class="flex flex-wrap gap-2">
-                <UButton
-                  v-for="network in SOCIAL_NETWORKS"
-                  :key="network"
-                  :icon="SOCIAL_NETWORK_ICONS[network]"
-                  :label="SOCIAL_NETWORK_LABELS[network]"
-                  :color="serviceState.social_networks.includes(network) ? 'primary' : 'neutral'"
-                  :variant="serviceState.social_networks.includes(network) ? 'solid' : 'outline'"
-                  size="sm"
-                  :aria-pressed="serviceState.social_networks.includes(network)"
-                  @click="toggleNetwork(network)"
-                />
-              </div>
-            </UFormField>
-
-            <USeparator label="Precio" />
-
-            <div class="grid grid-cols-2 gap-4">
-              <UFormField label="Precio (COP)" name="price" required>
-                <UInputNumber v-model="serviceState.price" :min="0" class="w-full" />
-              </UFormField>
-
-              <UFormField label="Comisión por referido (%)" name="commission_rate" required>
-                <UInputNumber v-model="serviceState.commission_rate" :min="0" :max="100" class="w-full" />
-              </UFormField>
-            </div>
-
-            <UButton type="submit" label="Crear servicio" :loading="creating" block />
-          </UForm>
+          <DashboardServiceForm
+            :initial="serviceInitial"
+            :loading="creating"
+            submit-label="Crear servicio"
+            @submit="createService"
+          />
         </template>
       </UModal>
     </div>
+
+    <UModal v-model:open="editModalOpen" :title="`Editar ${editing?.name ?? 'servicio'}`">
+      <template #body>
+        <DashboardServiceForm
+          :initial="editInitial"
+          :loading="saving"
+          submit-label="Guardar cambios"
+          @submit="updateService"
+        />
+      </template>
+    </UModal>
 
     <UCard>
       <template #header>
