@@ -9,6 +9,10 @@ const { user, signOut } = useAuth();
 
 const roleLabel = computed(() => (role.value ? ROLE_LABELS[role.value] : ''));
 
+// Título que la página de detalle publica para el último tramo, porque una
+// ruta dinámica mostraría el identificador en crudo.
+const breadcrumbTitle = useBreadcrumbTitle();
+
 // Miga de pan derivada de la ruta, para no mantener una lista aparte.
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
   const segments = route.path.split('/').filter(Boolean).filter(s => s !== 'dashboard');
@@ -16,7 +20,9 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: localePath('/dashboard') },
     ...segments.map((segment, index) => ({
-      label: decodeURIComponent(segment).replace(/-/g, ' '),
+      label: index === segments.length - 1 && breadcrumbTitle.value
+        ? breadcrumbTitle.value
+        : decodeURIComponent(segment).replace(/-/g, ' '),
       to: localePath(`/dashboard/${segments.slice(0, index + 1).join('/')}`),
     })),
   ];

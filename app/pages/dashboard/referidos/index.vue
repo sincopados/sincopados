@@ -9,6 +9,8 @@
       <p class="mt-1 text-muted">Comparte tu código y gana por cada servicio o curso contratado.</p>
     </div>
 
+    <DashboardWithdrawalPanel />
+
     <DashboardReferralPanel />
   </div>
 </template>

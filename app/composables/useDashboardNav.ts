@@ -41,6 +41,7 @@ export const useDashboardNav = () => {
         ],
       })
       items.push(link('Cursos', 'i-lucide-book-open', '/dashboard/cursos'))
+      items.push(link('Servicios contratados', 'i-lucide-route', '/dashboard/servicios-contratados'))
     }
 
     if (current === 'superusuario') {
@@ -63,6 +64,7 @@ export const useDashboardNav = () => {
 
     if (role.value === 'superusuario') {
       items.push(link('Referidos globales', 'i-lucide-globe', '/dashboard/referidos/global'))
+      items.push(link('Solicitudes de retiro', 'i-lucide-hand-coins', '/dashboard/retiros'))
     }
 
     return items

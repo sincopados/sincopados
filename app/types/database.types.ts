@@ -10,10 +10,126 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
+      client_service_payments: {
+        Row: {
+          amount: number
+          client_service_id: string
+          created_at: string
+          id: string
+          method: string | null
+          notes: string | null
+          paid_at: string
+          recorded_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          client_service_id: string
+          created_at?: string
+          id?: string
+          method?: string | null
+          notes?: string | null
+          paid_at?: string
+          recorded_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          client_service_id?: string
+          created_at?: string
+          id?: string
+          method?: string | null
+          notes?: string | null
+          paid_at?: string
+          recorded_by?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_service_payments_client_service_id_fkey"
+            columns: ["client_service_id"]
+            isOneToOne: false
+            referencedRelation: "client_services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_service_payments_recorded_by_fkey"
+            columns: ["recorded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_service_payments_recorded_by_fkey"
+            columns: ["recorded_by"]
+            isOneToOne: false
+            referencedRelation: "referral_summary"
+            referencedColumns: ["profile_id"]
+          },
+        ]
+      }
+      client_service_stages: {
+        Row: {
+          client_service_id: string
+          completed_at: string | null
+          completed_by: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          position: number
+          stage: Database["public"]["Enums"]["service_stage"]
+          updated_at: string
+        }
+        Insert: {
+          client_service_id: string
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          position: number
+          stage: Database["public"]["Enums"]["service_stage"]
+          updated_at?: string
+        }
+        Update: {
+          client_service_id?: string
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          position?: number
+          stage?: Database["public"]["Enums"]["service_stage"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "client_service_stages_client_service_id_fkey"
+            columns: ["client_service_id"]
+            isOneToOne: false
+            referencedRelation: "client_services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_service_stages_completed_by_fkey"
+            columns: ["completed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "client_service_stages_completed_by_fkey"
+            columns: ["completed_by"]
+            isOneToOne: false
+            referencedRelation: "referral_summary"
+            referencedColumns: ["profile_id"]
+          },
+        ]
+      }
       client_services: {
         Row: {
           amount: number
@@ -24,6 +140,7 @@ export type Database = {
           id: string
           manager_id: string | null
           notes: string | null
+          payment_status: Database["public"]["Enums"]["payment_status"]
           service_id: string
           starts_at: string
           status: Database["public"]["Enums"]["service_status"]
@@ -38,6 +155,7 @@ export type Database = {
           id?: string
           manager_id?: string | null
           notes?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
           service_id: string
           starts_at?: string
           status?: Database["public"]["Enums"]["service_status"]
@@ -52,6 +170,7 @@ export type Database = {
           id?: string
           manager_id?: string | null
           notes?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
           service_id?: string
           starts_at?: string
           status?: Database["public"]["Enums"]["service_status"]
@@ -216,6 +335,53 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "referral_summary"
             referencedColumns: ["profile_id"]
+          },
+        ]
+      }
+      payout_accounts: {
+        Row: {
+          account_number: string | null
+          created_at: string
+          holder_name: string | null
+          id: string
+          is_default: boolean
+          label: string | null
+          method: Database["public"]["Enums"]["payout_method"]
+          profile_id: string
+          provider: string | null
+          updated_at: string
+        }
+        Insert: {
+          account_number?: string | null
+          created_at?: string
+          holder_name?: string | null
+          id?: string
+          is_default?: boolean
+          label?: string | null
+          method: Database["public"]["Enums"]["payout_method"]
+          profile_id: string
+          provider?: string | null
+          updated_at?: string
+        }
+        Update: {
+          account_number?: string | null
+          created_at?: string
+          holder_name?: string | null
+          id?: string
+          is_default?: boolean
+          label?: string | null
+          method?: Database["public"]["Enums"]["payout_method"]
+          profile_id?: string
+          provider?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payout_accounts_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -407,8 +573,96 @@ export type Database = {
         }
         Relationships: []
       }
+      withdrawal_requests: {
+        Row: {
+          admin_notes: string | null
+          amount: number
+          created_at: string
+          currency: string
+          eta_hours: number
+          id: string
+          notes: string | null
+          payout_account_id: string | null
+          payout_account_number: string | null
+          payout_holder: string | null
+          payout_method: Database["public"]["Enums"]["payout_method"] | null
+          payout_provider: string | null
+          referrer_id: string
+          requested_at: string
+          resolved_at: string | null
+          resolved_by: string | null
+          status: Database["public"]["Enums"]["withdrawal_status"]
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          amount: number
+          created_at?: string
+          currency?: string
+          eta_hours?: number
+          id?: string
+          notes?: string | null
+          payout_account_id?: string | null
+          payout_account_number?: string | null
+          payout_holder?: string | null
+          payout_method?: Database["public"]["Enums"]["payout_method"] | null
+          payout_provider?: string | null
+          referrer_id: string
+          requested_at?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["withdrawal_status"]
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          amount?: number
+          created_at?: string
+          currency?: string
+          eta_hours?: number
+          id?: string
+          notes?: string | null
+          payout_account_id?: string | null
+          payout_account_number?: string | null
+          payout_holder?: string | null
+          payout_method?: Database["public"]["Enums"]["payout_method"] | null
+          payout_provider?: string | null
+          referrer_id?: string
+          requested_at?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["withdrawal_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "withdrawal_requests_referrer_id_fkey"
+            columns: ["referrer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "withdrawal_requests_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
+      referral_balance: {
+        Row: {
+          available_amount: number | null
+          locked_amount: number | null
+          profile_id: string | null
+          requested_amount: number | null
+          withdrawn_amount: number | null
+        }
+        Relationships: []
+      }
       referral_summary: {
         Row: {
           email: string | null
@@ -426,10 +680,28 @@ export type Database = {
     }
     Functions: {
       generate_referral_code: { Args: never; Returns: string }
+      request_commission_withdrawal: {
+        Args: { p_amount: number; p_account_id: string; p_notes?: string }
+        Returns: string
+      }
+      sync_client_service_stages: {
+        Args: { p_client_service_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       enrollment_status: "activo" | "completado" | "cancelado"
+      payment_status: "espera" | "inicial" | "debe" | "pagado"
+      payout_method: "efectivo" | "transferencia" | "bre_b"
       referral_status: "pendiente" | "aprobado" | "pagado" | "anulado"
+      service_stage:
+        | "pre_produccion"
+        | "produccion"
+        | "pos_produccion"
+        | "correccion"
+        | "entrega"
+        | "publicacion"
+        | "informe"
       service_status: "activo" | "finalizado" | "cancelado"
       social_network:
         | "facebook"
@@ -439,6 +711,7 @@ export type Database = {
         | "x"
         | "youtube"
       user_role: "superusuario" | "tutor" | "cliente" | "alumno" | "afiliado"
+      withdrawal_status: "en_proceso" | "procesado" | "cancelado"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -567,7 +840,18 @@ export const Constants = {
   public: {
     Enums: {
       enrollment_status: ["activo", "completado", "cancelado"],
+      payment_status: ["espera", "inicial", "debe", "pagado"],
+      payout_method: ["efectivo", "transferencia", "bre_b"],
       referral_status: ["pendiente", "aprobado", "pagado", "anulado"],
+      service_stage: [
+        "pre_produccion",
+        "produccion",
+        "pos_produccion",
+        "correccion",
+        "entrega",
+        "publicacion",
+        "informe",
+      ],
       service_status: ["activo", "finalizado", "cancelado"],
       social_network: [
         "facebook",
@@ -578,6 +862,7 @@ export const Constants = {
         "youtube",
       ],
       user_role: ["superusuario", "tutor", "cliente", "alumno", "afiliado"],
+      withdrawal_status: ["en_proceso", "procesado", "cancelado"],
     },
   },
 } as const

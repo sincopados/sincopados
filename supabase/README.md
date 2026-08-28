@@ -56,6 +56,10 @@ sólo se usa en rutas de servidor (`server/api/admin/**`) y nunca llega al naveg
 | `profiles` | propio perfil, usuarios referidos, y los roles que el actor puede administrar | propio perfil; superusuario todos; tutor sólo cliente/alumno/afiliado |
 | `services`, `courses` | activos para todos; todos para staff | superusuario y tutor |
 | `client_services` | propios; todos para staff | superusuario y tutor |
+| `client_service_stages` | el cliente dueño del servicio; todas para staff | sólo `completed_at` y `notes`, y sólo el superusuario o el responsable del servicio |
+| `client_service_payments` | el cliente dueño del servicio; todas para staff | sólo el superusuario; `recorded_by` lo escribe el trigger |
+| `withdrawal_requests` | las propias; todas para el superusuario | se crean sólo por RPC; el superusuario cambia estado, plazo y nota |
+| `payout_accounts` | sólo las propias | sólo las propias; el administrador no las lee, el ticket lleva copia |
 | `enrollments` | propias; todas para staff | superusuario y tutor |
 | `referral_earnings` | propias; todas para superusuario | sólo triggers; superusuario cambia el estado |
 
@@ -70,6 +74,36 @@ Reglas que la base de datos garantiza aunque el frontend falle:
 - Ninguna función de trigger conserva el `EXECUTE` que Postgres concede a
   `PUBLIC` por defecto, así que no quedan expuestas como endpoints
   `/rest/v1/rpc/…`.
+- Las etapas de un servicio las siembra el trigger `seed_client_service_stages`
+  al contratarlo, y `resync_stages` las ajusta si el catálogo cambia
+  `manages_social`. No hay política de INSERT ni de DELETE sobre
+  `client_service_stages`: las filas no se crean a mano.
+- Quién y cuándo cumplió una etapa lo escribe `stamp_stage_completion`, no el
+  cliente de la API: `completed_by` ni siquiera está en el `grant` de columnas,
+  así que la firma no se puede falsificar.
+- Un servicio se cobra en uno o varios pagos. El saldo se calcula sumando
+  `client_service_payments`, nunca se guarda: un total almacenado se
+  desincroniza en cuanto alguien corrige un importe. `payment_status` describe
+  el acuerdo comercial y lo fija el superusuario a mano.
+- `recorded_by` lo pone `stamp_payment_author` y queda fuera del `grant` de
+  columnas, igual que la firma de las etapas.
+- Una comisión de referido sólo es retirable cuando su servicio está **pagado**
+  y con **toda la trazabilidad cumplida**. Lo decide
+  `refresh_referral_eligibility()`, disparada al cambiar `payment_status` o
+  cualquier etapa: el saldo no depende de que una pantalla lo recalcule.
+- El retiro se pide con `request_commission_withdrawal()`, que suma las
+  comisiones aprobadas y las engancha al ticket en una sola transacción. El
+  importe nunca llega del cliente, y `withdrawal_requests` no tiene política de
+  INSERT: es el único camino.
+- Un índice único parcial garantiza **una sola solicitud abierta por usuario**,
+  para que dos tickets no reclamen las mismas comisiones.
+- El retiro es parcial: desde 10.000 pesos hasta el disponible. Por eso una
+  comisión ya no se engancha a un ticket (no se puede partir en dos) y el saldo
+  sale de un libro mayor: `disponible = comisiones aprobadas − retiros en
+  proceso o procesados`. Cancelar un ticket devuelve su importe al saldo.
+- El ticket guarda copiados el medio, la entidad, el número y el titular. Si el
+  usuario borra la cuenta después, el histórico contable sigue explicando a
+  dónde fue el dinero.
 
 Verificado contra el proyecto real con usuarios de cada rol: un cliente sólo ve
 su perfil, un afiliado ve además a quienes refirió, un tutor ve a
