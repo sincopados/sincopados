@@ -67,6 +67,30 @@ const openEditor = (service: Service) => {
   editing.value = service;
 };
 
+// Nombre del servicio que se está duplicando; `null` cuando el modal de alta
+// se abrió en blanco. Sirve sólo para titular el modal.
+const duplicating = ref<string | null>(null);
+
+/**
+ * Duplicar abre el alta precargada en vez de insertar una copia a ciegas: el
+ * slug se deriva del nombre y debe ser único, así que hay que cambiarlo antes
+ * de guardar. El sufijo «(copia)» deja el formulario listo para enviar.
+ */
+const duplicateService = (service: Service) => {
+  serviceInitial.value = { ...serviceToForm(service), name: `${service.name} (copia)` };
+  duplicating.value = service.name;
+  modalOpen.value = true;
+};
+
+// Cerrar el modal deja de ser una duplicación: la próxima apertura desde el
+// botón «Nuevo servicio» debe partir en blanco.
+watch(modalOpen, (open) => {
+  if (open) return;
+
+  duplicating.value = null;
+  serviceInitial.value = emptyServiceForm();
+});
+
 const createService = async (event: FormSubmitEvent<ServiceSchema>) => {
   creating.value = true;
 
@@ -199,8 +223,14 @@ const assignService = async (event: FormSubmitEvent<AssignSchema>) => {
   toast.add({ title: 'Servicio asignado', color: 'success' });
 };
 
+// El correo va en `description` y no pegado al nombre: se ve como subtítulo en
+// la lista, y `filter-fields` lo hace buscable sin ensuciar la etiqueta.
 const clientOptions = computed(() =>
-  (clients.value ?? []).map(c => ({ label: c.full_name || c.email, value: c.id })),
+  (clients.value ?? []).map(c => ({
+    label: c.full_name || c.email,
+    description: c.email,
+    value: c.id,
+  })),
 );
 
 const serviceOptions = computed(() =>
@@ -210,6 +240,7 @@ const serviceOptions = computed(() =>
 const managerOptions = computed(() =>
   (managers.value ?? []).map(m => ({
     label: `${m.full_name || m.email} · ${ROLE_LABELS[m.role]}`,
+    description: m.email,
     value: m.id,
   })),
 );
@@ -276,6 +307,11 @@ const columns: TableColumn<Service>[] = [
             onSelect: () => openEditor(row.original),
           },
           {
+            label: 'Duplicar',
+            icon: 'i-lucide-copy',
+            onSelect: () => duplicateService(row.original),
+          },
+          {
             label: row.original.is_active ? 'Desactivar' : 'Activar',
             icon: row.original.is_active ? 'i-lucide-eye-off' : 'i-lucide-eye',
             onSelect: () => toggleActive(row.original),
@@ -309,7 +345,7 @@ const columns: TableColumn<Service>[] = [
         <p class="mt-1 text-muted">Catálogo de servicios y asignación a clientes.</p>
       </div>
 
-      <UModal v-model:open="modalOpen" title="Nuevo servicio">
+      <UModal v-model:open="modalOpen" :title="duplicating ? `Duplicar «${duplicating}»` : 'Nuevo servicio'">
         <UButton icon="i-lucide-plus" label="Nuevo servicio" />
 
         <template #body>
@@ -358,7 +394,10 @@ const columns: TableColumn<Service>[] = [
             v-model="assignState.client_id"
             :items="clientOptions"
             value-key="value"
+            :filter-fields="['label', 'description']"
+            :search-input="{ placeholder: 'Busca por nombre o correo…' }"
             class="w-full"
+            placeholder="Selecciona un cliente"
           />
         </UFormField>
 
@@ -376,6 +415,8 @@ const columns: TableColumn<Service>[] = [
             v-model="assignState.manager_id"
             :items="managerOptions"
             value-key="value"
+            :filter-fields="['label', 'description']"
+            :search-input="{ placeholder: 'Busca por nombre o correo…' }"
             class="w-full"
             placeholder="Sin asignar"
           />
