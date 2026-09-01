@@ -60,6 +60,7 @@ sólo se usa en rutas de servidor (`server/api/admin/**`) y nunca llega al naveg
 | `client_service_payments` | el cliente dueño del servicio; todas para staff | sólo el superusuario; `recorded_by` lo escribe el trigger |
 | `withdrawal_requests` | las propias; todas para el superusuario | se crean sólo por RPC; el superusuario cambia estado, plazo y nota |
 | `payout_accounts` | sólo las propias | sólo las propias; el administrador no las lee, el ticket lleva copia |
+| `services` (catálogo) | los activos para cualquier autenticado; todos para staff | superusuario y tutor |
 | `enrollments` | propias; todas para staff | superusuario y tutor |
 | `referral_earnings` | propias; todas para superusuario | sólo triggers; superusuario cambia el estado |
 
@@ -104,6 +105,11 @@ Reglas que la base de datos garantiza aunque el frontend falle:
 - El ticket guarda copiados el medio, la entidad, el número y el titular. Si el
   usuario borra la cuenta después, el histórico contable sigue explicando a
   dónde fue el dinero.
+- Un afiliado no puede leer `client_services`, así que los servicios que ha
+  referido se sirven por `get_referred_services()`, `security definer` y
+  filtrada por `auth.uid()`. Devuelve el servicio, su avance y la comisión,
+  pero ningún dato del cliente: al afiliado le corresponde saber qué se
+  contrató y cuánto gana, no quién lo contrató.
 
 Verificado contra el proyecto real con usuarios de cada rol: un cliente sólo ve
 su perfil, un afiliado ve además a quienes refirió, un tutor ve a
