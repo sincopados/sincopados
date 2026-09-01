@@ -69,6 +69,43 @@ const canTrack = computed(() =>
 const canBill = computed(() => isSuperuser.value);
 
 const savingStatus = ref(false);
+const savingCommission = ref(false);
+
+/**
+ * Anula o reactiva la comisión de referido de esta contratación.
+ *
+ * La comisión no se borra: el trigger la pasa a `anulado`, así que queda
+ * registrada y volver a activar el interruptor la devuelve al saldo del
+ * afiliado según la regla de siempre.
+ */
+const toggleCommission = async () => {
+  if (!item.value) return;
+
+  const next = !item.value.commission_enabled;
+  savingCommission.value = true;
+
+  const { error } = await client
+    .from('client_services')
+    .update({ commission_enabled: next })
+    .eq('id', serviceId.value);
+
+  savingCommission.value = false;
+
+  if (error) {
+    toast.add({ title: 'No se pudo cambiar la comisión', description: error.message, color: 'error' });
+    return;
+  }
+
+  toast.add({
+    title: next ? 'Comisión reactivada' : 'Comisión anulada',
+    description: next
+      ? 'Vuelve a contar para el saldo del afiliado.'
+      : 'Deja de contar para el saldo del afiliado.',
+    color: next ? 'success' : 'warning',
+  });
+
+  await refresh();
+};
 
 const setPaymentStatus = async (next: PaymentStatus) => {
   if (!item.value || next === item.value.payment_status) return;
@@ -159,6 +196,15 @@ const personName = (person: PersonRef) => person?.full_name || person?.email || 
           <UBadge :color="statusColor(item.status)" variant="subtle" size="lg">
             {{ item.status }}
           </UBadge>
+          <UBadge
+            v-if="!item.commission_enabled"
+            color="warning"
+            variant="subtle"
+            size="lg"
+            icon="i-lucide-ban"
+          >
+            Sin comisión
+          </UBadge>
         </div>
       </div>
 
@@ -222,20 +268,45 @@ const personName = (person: PersonRef) => person?.full_name || person?.email || 
         </dl>
 
         <template v-if="canBill" #footer>
-          <div class="space-y-2">
-            <p class="text-xs uppercase tracking-wide text-muted">Cambiar estado de pago</p>
-            <div class="flex flex-wrap gap-2">
-              <UButton
-                v-for="option in PAYMENT_STATUSES"
-                :key="option"
-                size="sm"
-                :icon="PAYMENT_STATUS_ICONS[option]"
-                :label="PAYMENT_STATUS_LABELS[option]"
-                :color="item.payment_status === option ? PAYMENT_STATUS_COLORS[option] : 'neutral'"
-                :variant="item.payment_status === option ? 'solid' : 'outline'"
-                :disabled="savingStatus"
-                :aria-pressed="item.payment_status === option"
-                @click="setPaymentStatus(option)"
+          <div class="space-y-5">
+            <div class="space-y-2">
+              <p class="text-xs uppercase tracking-wide text-muted">Cambiar estado de pago</p>
+              <div class="flex flex-wrap gap-2">
+                <UButton
+                  v-for="option in PAYMENT_STATUSES"
+                  :key="option"
+                  size="sm"
+                  :icon="PAYMENT_STATUS_ICONS[option]"
+                  :label="PAYMENT_STATUS_LABELS[option]"
+                  :color="item.payment_status === option ? PAYMENT_STATUS_COLORS[option] : 'neutral'"
+                  :variant="item.payment_status === option ? 'solid' : 'outline'"
+                  :disabled="savingStatus"
+                  :aria-pressed="item.payment_status === option"
+                  @click="setPaymentStatus(option)"
+                />
+              </div>
+            </div>
+
+            <USeparator />
+
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="min-w-0">
+                <p class="text-xs uppercase tracking-wide text-muted">Comisión de referido</p>
+                <p class="mt-1 text-sm text-toned">
+                  <template v-if="item.commission_enabled">
+                    Esta contratación genera comisión para quien refirió al cliente.
+                  </template>
+                  <template v-else>
+                    Comisión anulada: no cuenta para el saldo del afiliado.
+                  </template>
+                </p>
+              </div>
+
+              <USwitch
+                :model-value="item.commission_enabled"
+                :disabled="savingCommission"
+                :label="item.commission_enabled ? 'Activa' : 'Anulada'"
+                @update:model-value="toggleCommission"
               />
             </div>
           </div>

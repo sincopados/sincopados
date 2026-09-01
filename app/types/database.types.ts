@@ -134,6 +134,7 @@ export type Database = {
         Row: {
           amount: number
           client_id: string
+          commission_enabled: boolean
           created_at: string
           currency: string
           ends_at: string | null
@@ -149,6 +150,7 @@ export type Database = {
         Insert: {
           amount?: number
           client_id: string
+          commission_enabled?: boolean
           created_at?: string
           currency?: string
           ends_at?: string | null
@@ -164,6 +166,7 @@ export type Database = {
         Update: {
           amount?: number
           client_id?: string
+          commission_enabled?: boolean
           created_at?: string
           currency?: string
           ends_at?: string | null
