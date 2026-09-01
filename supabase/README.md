@@ -110,6 +110,10 @@ Reglas que la base de datos garantiza aunque el frontend falle:
   filtrada por `auth.uid()`. Devuelve el servicio, su avance y la comisión,
   pero ningún dato del cliente: al afiliado le corresponde saber qué se
   contrató y cuánto gana, no quién lo contrató.
+- `client_services.commission_enabled` permite al superusuario anular la
+  comisión de una contratación concreta. La comisión no se borra: pasa a
+  `anulado`, que no suma ni en retenido ni en disponible, y volver a activar el
+  interruptor la devuelve al saldo según la regla de siempre.
 
 Verificado contra el proyecto real con usuarios de cada rol: un cliente sólo ve
 su perfil, un afiliado ve además a quienes refirió, un tutor ve a
