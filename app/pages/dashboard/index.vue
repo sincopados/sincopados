@@ -44,6 +44,8 @@ const greeting = computed(() => profile.value?.full_name?.split(' ')[0] || profi
       </p>
     </div>
 
+    <DashboardReferralGuide v-if="role === 'afiliado'" />
+
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       <DashboardStatCard
         v-if="isStaff"
@@ -91,6 +93,7 @@ const greeting = computed(() => profile.value?.full_name?.split(' ')[0] || profi
         <UButton v-if="isSuperuser" icon="i-lucide-globe" label="Referidos globales" :to="localePath('/dashboard/referidos/global')" variant="outline" color="neutral" />
         <UButton v-if="role === 'cliente'" icon="i-lucide-package" label="Mis servicios" :to="localePath('/dashboard/mis-servicios')" variant="outline" color="neutral" />
         <UButton v-if="role === 'alumno'" icon="i-lucide-book-open" label="Mis cursos" :to="localePath('/dashboard/mis-cursos')" variant="outline" color="neutral" />
+        <UButton v-if="!isStaff" icon="i-lucide-package" label="Catálogo de servicios" :to="localePath('/dashboard/servicios-catalogo')" variant="outline" color="neutral" />
       </div>
     </UCard>
   </div>

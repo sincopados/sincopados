@@ -680,6 +680,22 @@ export type Database = {
     }
     Functions: {
       generate_referral_code: { Args: never; Returns: string }
+      get_referred_services: {
+        Args: never
+        Returns: {
+          earning_id: string
+          service_name: string
+          service_status: Database["public"]["Enums"]["service_status"]
+          payment_status: Database["public"]["Enums"]["payment_status"]
+          starts_at: string
+          ends_at: string | null
+          commission_amount: number
+          commission_status: Database["public"]["Enums"]["referral_status"]
+          currency: string
+          total_stages: number
+          completed_stages: number
+        }[]
+      }
       request_commission_withdrawal: {
         Args: { p_amount: number; p_account_id: string; p_notes?: string }
         Returns: string

@@ -57,6 +57,12 @@ export const useDashboardNav = () => {
       items.push(link('Mis servicios', 'i-lucide-package-check', '/dashboard/mis-servicios'))
     }
 
+    // El catálogo es lo que un afiliado ofrece, así que le da una entrada
+    // propia; al resto de no-staff le sirve para consultar qué se vende.
+    if (current && !isStaff(current)) {
+      items.push(link('Servicios', 'i-lucide-package', '/dashboard/servicios-catalogo'))
+    }
+
     if (current === 'alumno') {
       items.push(link('Mis cursos', 'i-lucide-book-open-check', '/dashboard/mis-cursos'))
     }
