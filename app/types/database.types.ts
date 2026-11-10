@@ -341,6 +341,33 @@ export type Database = {
           },
         ]
       }
+      media_network_leads: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          interests: Database["public"]["Enums"]["media_network_interest"][]
+          source: string | null
+          whatsapp: string
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          id?: string
+          interests: Database["public"]["Enums"]["media_network_interest"][]
+          source?: string | null
+          whatsapp: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          interests?: Database["public"]["Enums"]["media_network_interest"][]
+          source?: string | null
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       payout_accounts: {
         Row: {
           account_number: string | null
@@ -710,6 +737,11 @@ export type Database = {
     }
     Enums: {
       enrollment_status: "activo" | "completado" | "cancelado"
+      media_network_interest:
+        | "trabaja_con_nosotros"
+        | "clases_edicion"
+        | "programa_afiliados"
+        | "bodega_contenidos"
       payment_status: "espera" | "inicial" | "debe" | "pagado"
       payout_method: "efectivo" | "transferencia" | "bre_b"
       referral_status: "pendiente" | "aprobado" | "pagado" | "anulado"
@@ -859,6 +891,12 @@ export const Constants = {
   public: {
     Enums: {
       enrollment_status: ["activo", "completado", "cancelado"],
+      media_network_interest: [
+        "trabaja_con_nosotros",
+        "clases_edicion",
+        "programa_afiliados",
+        "bodega_contenidos",
+      ],
       payment_status: ["espera", "inicial", "debe", "pagado"],
       payout_method: ["efectivo", "transferencia", "bre_b"],
       referral_status: ["pendiente", "aprobado", "pagado", "anulado"],

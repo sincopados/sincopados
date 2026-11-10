@@ -16,6 +16,7 @@ export type PaymentStatus = Enums<'payment_status'>
 export type WithdrawalStatus = Enums<'withdrawal_status'>
 export type PayoutMethod = Enums<'payout_method'>
 export type SocialNetwork = Enums<'social_network'>
+export type MediaNetworkInterest = Enums<'media_network_interest'>
 
 export type Profile = Tables<'profiles'>
 export type Service = Tables<'services'>
@@ -29,3 +30,4 @@ export type ReferralSummary = Tables<'referral_summary'>
 export type ReferralBalance = Tables<'referral_balance'>
 export type WithdrawalRequest = Tables<'withdrawal_requests'>
 export type PayoutAccount = Tables<'payout_accounts'>
+export type MediaNetworkLead = Tables<'media_network_leads'>

@@ -46,6 +46,7 @@ export const useDashboardNav = () => {
           link('Contratados', 'i-lucide-route', '/dashboard/servicios-contratados'),
         ],
       })
+      items.push(link('Media Network', 'i-lucide-radio-tower', '/dashboard/media-network'))
     }
     else if (current === 'tutor') {
       // El tutor no administra el catálogo, así que sólo ve lo contratado y no
