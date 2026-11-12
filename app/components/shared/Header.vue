@@ -49,6 +49,10 @@
 ]
 
   const items = computed<NavigationMenuItem[]>(() => [{
+    label: 'Video Marketing',
+    to: '/video-marketing',
+    active: route.path.startsWith('/video-marketing')
+  }, {
     label: 'Redes Sociales',
     to: '/redes-sociales',
     //icon: 'i-lucide-book-open',

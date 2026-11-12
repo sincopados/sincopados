@@ -18,6 +18,8 @@
     "@nuxt/ui": "^4.6.1",
     "@nuxtjs/i18n": "10.2.3",
     "@nuxtjs/supabase": "^2.0.10",
+    "@vueuse/core": "14.3.0",
+    "@vueuse/nuxt": "14.3.0",
     "animejs": "^4.5.0",
     "npx": "^10.2.2",
     "nuxt": "^4.4.2",

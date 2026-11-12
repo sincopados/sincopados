@@ -2,37 +2,37 @@ import * as z from 'zod'
 
 /** Vertientes de la convocatoria. Refleja el enum `media_network_interest`. */
 export type MediaNetworkInterest =
-  | 'trabaja_con_nosotros'
-  | 'clases_edicion'
-  | 'programa_afiliados'
-  | 'bodega_contenidos'
+  | 'produccion_contenido'
+  | 'trabajo_remoto'
+  | 'monetizacion'
+  | 'publicacion_lanzamiento'
 
 export const MEDIA_NETWORK_INTERESTS = [
-  'trabaja_con_nosotros',
-  'clases_edicion',
-  'programa_afiliados',
-  'bodega_contenidos',
+  'produccion_contenido',
+  'trabajo_remoto',
+  'monetizacion',
+  'publicacion_lanzamiento',
 ] as const satisfies readonly MediaNetworkInterest[]
 
 export const MEDIA_NETWORK_INTEREST_LABELS: Record<MediaNetworkInterest, string> = {
-  trabaja_con_nosotros: 'Trabaja con Nosotros',
-  clases_edicion: 'Clases Virtuales de Edición',
-  programa_afiliados: 'Programa de Afiliados',
-  bodega_contenidos: 'Bodega de Contenidos Pregrabados',
+  produccion_contenido: 'Producción de contenido',
+  trabajo_remoto: 'Trabajo remoto',
+  monetizacion: 'Monetización',
+  publicacion_lanzamiento: 'Publicación y campañas de lanzamiento',
 }
 
 export const MEDIA_NETWORK_INTEREST_DESCRIPTIONS: Record<MediaNetworkInterest, string> = {
-  trabaja_con_nosotros: 'Únete al equipo de producción como editor o creador de contenido.',
-  clases_edicion: 'Formación especializada en edición, en grupos virtuales.',
-  programa_afiliados: 'Vende activos digitales y monetiza de forma remota.',
-  bodega_contenidos: 'Accede a contenidos pregrabados listos para usar.',
+  produccion_contenido: 'Graba, edita y produce contenido de alto impacto con el equipo.',
+  trabajo_remoto: 'Intégrate a la red como editor o talento digital, desde donde estés.',
+  monetizacion: 'Convierte tu audiencia y tus activos digitales en ingresos.',
+  publicacion_lanzamiento: 'Publica con estrategia y lanza campañas que generen tracción.',
 }
 
 export const MEDIA_NETWORK_INTEREST_ICONS: Record<MediaNetworkInterest, string> = {
-  trabaja_con_nosotros: 'i-lucide-clapperboard',
-  clases_edicion: 'i-lucide-graduation-cap',
-  programa_afiliados: 'i-lucide-handshake',
-  bodega_contenidos: 'i-lucide-archive',
+  produccion_contenido: 'i-lucide-clapperboard',
+  trabajo_remoto: 'i-lucide-laptop',
+  monetizacion: 'i-lucide-hand-coins',
+  publicacion_lanzamiento: 'i-lucide-rocket',
 }
 
 export const SINCOPADOS_YOUTUBE_CHANNEL = 'https://www.youtube.com/@SincopadosProducciones'
