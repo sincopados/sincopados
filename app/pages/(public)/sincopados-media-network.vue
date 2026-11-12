@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const title = 'Sincopados Media Network · Convocatoria abierta en Medellín'
 const description
-  = 'No buscamos clientes tradicionales, seleccionamos aliados. Postúlate a Sincopados Media Network: trabajo, clases de edición, afiliados y contenidos pregrabados.'
+  = 'No buscamos clientes tradicionales, seleccionamos aliados. Postúlate a Sincopados Media Network: producción de contenido, trabajo remoto, monetización y campañas de lanzamiento.'
 
 useSeoMeta({
   title,
