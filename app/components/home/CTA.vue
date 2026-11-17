@@ -6,14 +6,14 @@ const links = ref<ButtonProps[]>([
   {
     label: t('welcome'),
     color: 'neutral',
-    to:'/pricing'
+    to:'/about'
   },
   {
     label: 'Conoce Más',
     color: 'neutral',
     variant: 'subtle',
     trailingIcon: 'i-lucide-arrow-right',
-    to:'/pricing'
+    to:'/contact'
   }
 ]);
 

@@ -12,6 +12,9 @@ const roleLabel = computed(() => (role.value ? ROLE_LABELS[role.value] : ''));
 // Título que la página de detalle publica para el último tramo, porque una
 // ruta dinámica mostraría el identificador en crudo.
 const breadcrumbTitle = useBreadcrumbTitle();
+// Nombres por tramo, para rutas con más de un segmento dinámico
+// (por ejemplo curso y módulo).
+const breadcrumbLabels = useBreadcrumbLabelMap();
 
 // Miga de pan derivada de la ruta, para no mantener una lista aparte.
 const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
@@ -20,9 +23,10 @@ const breadcrumbItems = computed<BreadcrumbItem[]>(() => {
   return [
     { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: localePath('/dashboard') },
     ...segments.map((segment, index) => ({
-      label: index === segments.length - 1 && breadcrumbTitle.value
-        ? breadcrumbTitle.value
-        : decodeURIComponent(segment).replace(/-/g, ' '),
+      label: breadcrumbLabels.value[segment]
+        ?? (index === segments.length - 1 && breadcrumbTitle.value
+          ? breadcrumbTitle.value
+          : decodeURIComponent(segment).replace(/-/g, ' ')),
       to: localePath(`/dashboard/${segments.slice(0, index + 1).join('/')}`),
     })),
   ];

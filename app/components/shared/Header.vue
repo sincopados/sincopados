@@ -63,10 +63,9 @@
     to: '/videos-youtube',
     active: route.path.startsWith('/videos-youtube')
   }, {
-    label: 'Precios',
-    to: '/pricing',
-    //icon: 'i-lucide-box',
-    active: route.path.startsWith('/pricing')
+    label: 'Educación',
+    to: '/educacion',
+    active: route.path.startsWith('/educacion')
   }, {
     label: 'Nosotros',
     //icon: 'i-simple-icons-figma',

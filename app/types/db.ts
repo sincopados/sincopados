@@ -31,3 +31,7 @@ export type ReferralBalance = Tables<'referral_balance'>
 export type WithdrawalRequest = Tables<'withdrawal_requests'>
 export type PayoutAccount = Tables<'payout_accounts'>
 export type MediaNetworkLead = Tables<'media_network_leads'>
+export type CourseEnrollmentCount = Tables<'course_enrollment_counts'>
+export type CourseModule = Tables<'course_modules'>
+export type CourseClass = Tables<'course_classes'>
+export type CourseClassFile = Tables<'course_class_files'>

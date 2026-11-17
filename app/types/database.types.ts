@@ -217,6 +217,148 @@ export type Database = {
           },
         ]
       }
+      course_class_files: {
+        Row: {
+          class_id: string
+          created_at: string
+          created_by: string | null
+          id: string
+          mime_type: string
+          name: string
+          size_bytes: number
+          storage_path: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          mime_type: string
+          name: string
+          size_bytes: number
+          storage_path: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          mime_type?: string
+          name?: string
+          size_bytes?: number
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_class_files_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "course_classes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      course_classes: {
+        Row: {
+          content: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          module_id: string
+          slug: string
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          content?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          module_id: string
+          slug: string
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          content?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          module_id?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_classes_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "course_modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      course_modules: {
+        Row: {
+          course_id: string
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_modules_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "course_modules_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "course_enrollment_counts"
+            referencedColumns: ["course_id"]
+          },
+        ]
+      }
       courses: {
         Row: {
           commission_rate: number
@@ -683,6 +825,20 @@ export type Database = {
       }
     }
     Views: {
+      course_enrollment_counts: {
+        Row: {
+          active: number | null
+          cancelled: number | null
+          completed: number | null
+          course_id: string | null
+          is_active: boolean | null
+          slug: string | null
+          title: string | null
+          total: number | null
+          tutor_id: string | null
+        }
+        Relationships: []
+      }
       referral_balance: {
         Row: {
           available_amount: number | null
@@ -709,6 +865,13 @@ export type Database = {
       }
     }
     Functions: {
+      course_syllabus: {
+        Args: { p_course_ids?: string[] }
+        Returns: {
+          course_id: string
+          modules: Json
+        }[]
+      }
       generate_referral_code: { Args: never; Returns: string }
       get_referred_services: {
         Args: never
