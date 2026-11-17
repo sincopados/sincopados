@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as z from 'zod';
 import type { FormSubmitEvent, TableColumn } from '@nuxt/ui';
-import { UBadge, UButton, UDropdownMenu } from '#components';
+import { UBadge, UButton, UDropdownMenu, ULink } from '#components';
 import type { Course, Database, Profile } from '~/types/db';
 
 definePageMeta({
@@ -11,6 +11,8 @@ definePageMeta({
 
 const client = useSupabaseClient<Database>();
 const toast = useToast();
+const localePath = useLocalePath();
+const modulesPath = (course: Course) => localePath(`/dashboard/cursos/${course.slug}`);
 
 const money = (value: number, currency = 'COP') =>
   new Intl.NumberFormat('es-CO', { style: 'currency', currency, maximumFractionDigits: 0 }).format(value);
@@ -44,6 +46,13 @@ const courseState = reactive({ title: '', slug: '', description: '', cover_url: 
 const creating = ref(false);
 const modalOpen = ref(false);
 
+// El slug es único: se propone desde el título y se comprueba antes de crear.
+const { validateSlug, reset: resetSlugCheck } = useSlugAvailability('courses');
+const slugTouched = ref(false);
+watch(() => courseState.title, (title) => {
+  if (!slugTouched.value) courseState.slug = slugify(title);
+});
+
 const createCourse = async (event: FormSubmitEvent<CourseSchema>) => {
   creating.value = true;
 
@@ -59,11 +68,17 @@ const createCourse = async (event: FormSubmitEvent<CourseSchema>) => {
   creating.value = false;
 
   if (error) {
-    toast.add({ title: 'No se pudo crear el curso', description: error.message, color: 'error' });
+    toast.add({
+      title: 'No se pudo crear el curso',
+      description: error.code === '23505' ? 'Ese slug ya está en uso por otro curso.' : error.message,
+      color: 'error',
+    });
     return;
   }
 
   Object.assign(courseState, { title: '', slug: '', description: '', cover_url: '', price: 0, commission_rate: 10 });
+  slugTouched.value = false;
+  resetSlugCheck();
   modalOpen.value = false;
   toast.add({ title: 'Curso creado', color: 'success' });
   await refresh();
@@ -150,7 +165,15 @@ watch(() => enrollState.course_id, (id) => {
 });
 
 const columns: TableColumn<Course>[] = [
-  { accessorKey: 'title', header: 'Curso' },
+  {
+    accessorKey: 'title',
+    header: 'Curso',
+    cell: ({ row }) => h(
+      ULink,
+      { to: modulesPath(row.original), class: 'font-medium text-highlighted hover:text-primary' },
+      () => row.original.title,
+    ),
+  },
   { accessorKey: 'price', header: 'Precio', cell: ({ row }) => money(row.original.price, row.original.currency) },
   {
     accessorKey: 'commission_rate',
@@ -172,6 +195,11 @@ const columns: TableColumn<Course>[] = [
     cell: ({ row }) => h('div', { class: 'flex justify-end' }, [
       h(UDropdownMenu, {
         items: [[
+          {
+            label: 'Módulos',
+            icon: 'i-lucide-layers',
+            to: modulesPath(row.original),
+          },
           {
             label: row.original.is_active ? 'Desactivar' : 'Activar',
             icon: row.original.is_active ? 'i-lucide-eye-off' : 'i-lucide-eye',
@@ -210,13 +238,18 @@ const columns: TableColumn<Course>[] = [
         <UButton icon="i-lucide-plus" label="Nuevo curso" />
 
         <template #body>
-          <UForm :schema="courseSchema" :state="courseState" class="space-y-4" @submit="createCourse">
+          <UForm :schema="courseSchema" :validate="validateSlug" :state="courseState" class="space-y-4" @submit="createCourse">
             <UFormField label="Título" name="title" required>
               <UInput v-model="courseState.title" class="w-full" />
             </UFormField>
 
-            <UFormField label="Slug" name="slug" required>
-              <UInput v-model="courseState.slug" class="w-full" placeholder="edicion-de-video" />
+            <UFormField label="Slug" name="slug" required help="Identificador único en la URL.">
+              <UInput
+                v-model="courseState.slug"
+                class="w-full font-mono"
+                placeholder="edicion-de-video"
+                @update:model-value="slugTouched = true"
+              />
             </UFormField>
 
             <UFormField label="Descripción" name="description">

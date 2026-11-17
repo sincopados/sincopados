@@ -81,6 +81,9 @@ const greeting = computed(() => profile.value?.full_name?.split(' ')[0] || profi
       />
     </div>
 
+    <!-- Sólo staff: la RLS les deja ver todos los cursos e inscripciones. -->
+    <DashboardCourseEnrollments v-if="isStaff" />
+
     <UCard>
       <template #header>
         <h2 class="text-lg font-semibold">Accesos rápidos</h2>
