@@ -55,6 +55,16 @@ export default defineNuxtConfig({
     ],
   },
 
+  // /pricing está deshabilitada: el archivo de la página se conserva, pero sus
+  // URLs (en todos los idiomas) redirigen al inicio. Para reactivarla, borra
+  // estas reglas y vuelve a añadir «Precios» al menú en SharedHeader.
+  routeRules: {
+    '/pricing': { redirect: { to: '/', statusCode: 302 } },
+    '/en/pricing': { redirect: { to: '/en', statusCode: 302 } },
+    '/nl/pricing': { redirect: { to: '/nl', statusCode: 302 } },
+    '/fr/pricing': { redirect: { to: '/fr', statusCode: 302 } },
+  },
+
   i18n: {
     locales: [
       { code: 'es', language: 'es-ES', name:'Español',file: 'es.json' },
