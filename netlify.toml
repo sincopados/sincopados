@@ -9,3 +9,8 @@
   # `runtimeConfig.supabase.secretKey` se declara vacío en nuxt.config.ts y Nitro
   # la resuelve en cada arranque desde la variable de entorno.
   SECRETS_SCAN_OMIT_KEYS = "NUXT_PUBLIC_SUPABASE_URL,NUXT_PUBLIC_SUPABASE_KEY"
+
+  # El build de Nuxt (Vite + el servidor de Nitro) pasa de los ~2 GB de heap que
+  # Node usa por defecto en el contenedor de Netlify y aborta con «JavaScript
+  # heap out of memory». 4 GB deja margen sin pasarse de la RAM del contenedor.
+  NODE_OPTIONS = "--max-old-space-size=4096"
